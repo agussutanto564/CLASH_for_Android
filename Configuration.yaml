@@ -60,15 +60,15 @@ rule-providers:
   Rule_TikTok:
     type: http
     behavior: classical
-    path: "./provider/rule_tiktok.yaml"
+    path: "./provider/tiktok.yaml"
   Rule_WhatsApp:
     type: http
     behavior: classical
-    path: "./provider/rule_whatsapp.yaml"
+    path: "./provider/whatsapp.yaml"
   Rule_YouTube:
     type: http
     behavior: classical
-    path: "./provider/rule_youtube.yaml"
+    path: "./provider/youtube.yaml"
 
 rules:
   # 1. Akses Lokal
