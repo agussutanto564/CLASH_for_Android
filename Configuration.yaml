@@ -1,0 +1,86 @@
+# --- CONFIGURATION OPTIMIZED (agussutanto564) ---
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent # Matikan log agar CPU fokus ke video
+allow-lan: true
+unified-delay: true
+
+tcp-fast-open: false 
+tcp-concurrent: true
+external-controller: 127.0.0.1:9090
+keep-alive-interval: 15
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:7874
+  fake-ip-filter:
+    - '+.google.com'
+    - '+.gstatic.com'
+    - '+.push.apple.com'
+  default-nameserver:
+    - 8.8.8.8
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+
+sniffer:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+    # QUIC dimatikan agar tidak bentrok dengan jalur UDP Premium
+
+proxy-providers:
+  Akun-VPN:
+    type: file
+    path: "./vpn.yaml"
+    health-check:
+      enable: true
+      url: https://www.google.com
+      interval: 300
+      timeout: 5000
+
+proxy-groups:
+  - name: VPN
+    type: select
+    use:
+      - Akun-VPN
+
+rule-providers:
+  Rule_TikTok:
+    type: file
+    behavior: classical
+    path: "./rule_tiktok.yaml"
+  Rule_WhatsApp:
+    type: file
+    behavior: classical
+    path: "./rule_whatsapp.yaml"
+  Rule_YouTube:
+    type: file
+    behavior: classical
+    path: "./rule_youtube.yaml"
+
+rules:
+  # 1. Akses Lokal
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - GEOIP,LAN,DIRECT
+
+  # 2. Aturan Aplikasi (Disederhanakan)
+  - RULE-SET,Rule_WhatsApp,VPN
+  - RULE-SET,Rule_TikTok,VPN
+  - RULE-SET,Rule_YouTube,VPN
+  
+  # 3. Final Gateway
+  - GEOIP,ID,VPN
+  - MATCH,VPN
