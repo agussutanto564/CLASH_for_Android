@@ -41,7 +41,7 @@ sniffer:
 proxy-providers:
   Akun-VPN:
     type: http
-    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider_files/rule_vpn.yaml"
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/vpn.yaml"
     interval: 3600
     path: "./providers/vpn.yaml"
     health-check:
