@@ -1,5 +1,5 @@
 proxies:
-- name: Mâ­•NYETðŸ«Ÿ
+- name: MONYET
   server: support.udemy.com
   port: 443
   type: vmess
