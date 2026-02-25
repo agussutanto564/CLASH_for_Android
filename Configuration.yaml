@@ -6,11 +6,10 @@ mixed-port: 7893
 tproxy-port: 7895
 ipv6: false
 mode: rule
-log-level: silent # Matikan log agar CPU fokus ke video
+log-level: silent
 allow-lan: true
 unified-delay: true
-
-tcp-fast-open: false 
+tcp-fast-open: false
 tcp-concurrent: true
 external-controller: 127.0.0.1:9090
 keep-alive-interval: 15
@@ -38,15 +37,16 @@ sniffer:
       ports: [443, 8443]
     HTTP:
       ports: [80, 8080-8880]
-    # QUIC dimatikan agar tidak bentrok dengan jalur UDP Premium
 
 proxy-providers:
   Akun-VPN:
     type: http
-    path: "./provider/vpn.yaml"
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider_files/rule_vpn.yaml"
+    interval: 3600
+    path: "./providers/vpn.yaml"
     health-check:
       enable: true
-      url: https://www.google.com
+      url: http://www.gstatic.com/generate_204
       interval: 300
       timeout: 5000
 
@@ -60,27 +60,31 @@ rule-providers:
   Rule_TikTok:
     type: http
     behavior: classical
-    path: "./provider/tiktok.yaml"
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/tiktok.yaml"
+    interval: 86400
+    path: "./providers/tiktok.yaml"
+
   Rule_WhatsApp:
     type: http
     behavior: classical
-    path: "./provider/whatsapp.yaml"
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/whatsapp.yaml"
+    interval: 86400
+    path: "./providers/whatsapp.yaml"
+
   Rule_YouTube:
     type: http
     behavior: classical
-    path: "./provider/youtube.yaml"
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
+    interval: 86400
+    path: "./providers/youtube.yaml"
 
 rules:
-  # 1. Akses Lokal
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
-
-  # 2. Aturan Aplikasi (Disederhanakan)
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
-  
-  # 3. Final Gateway
   - GEOIP,ID,VPN
   - MATCH,VPN
+  
