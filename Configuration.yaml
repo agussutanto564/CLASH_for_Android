@@ -42,8 +42,8 @@ sniffer:
 
 proxy-providers:
   Akun-VPN:
-    type: file
-    path: "./vpn.yaml"
+    type: http
+    path: "./provider/vpn.yaml"
     health-check:
       enable: true
       url: https://www.google.com
@@ -58,17 +58,17 @@ proxy-groups:
 
 rule-providers:
   Rule_TikTok:
-    type: file
+    type: http
     behavior: classical
-    path: "./rule_tiktok.yaml"
+    path: "./provider/rule_tiktok.yaml"
   Rule_WhatsApp:
-    type: file
+    type: http
     behavior: classical
-    path: "./rule_whatsapp.yaml"
+    path: "./provider/rule_whatsapp.yaml"
   Rule_YouTube:
-    type: file
+    type: http
     behavior: classical
-    path: "./rule_youtube.yaml"
+    path: "./provider/rule_youtube.yaml"
 
 rules:
   # 1. Akses Lokal
