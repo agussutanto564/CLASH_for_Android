@@ -1,21 +1,32 @@
 payload:
-  # --- LAYER 1: DOMAINS ---
+  # --- [1] BEHAVIORAL DOMAINS (Notifikasi & Pesan Cepat) ---
   - DOMAIN-SUFFIX,whatsapp.com
   - DOMAIN-SUFFIX,whatsapp.net
   - DOMAIN-SUFFIX,whatsapp.org
+  - DOMAIN-SUFFIX,fbcdn.net        # Hosting gambar & video story
+  - DOMAIN-SUFFIX,facebook.com     # Infrastruktur push notif
+  - DOMAIN-SUFFIX,facebook.net
   - DOMAIN-SUFFIX,fb.me
+
+  # --- [2] VOICE & VIDEO CALL (Anti-Lag & Anti-Reconnecting) ---
+  # Menangkap trafik STUN/TURN yang digunakan WhatsApp untuk Call
   - DOMAIN-KEYWORD,whatsapp-plus
+  - DOMAIN-KEYWORD,whatsapp-cdn
   - DOMAIN-KEYWORD,wa-voip
   - DOMAIN-KEYWORD,wa-static
+  - DOMAIN-KEYWORD,wa.me
 
-  # --- LAYER 2: ASN (Tanpa no-resolve) ---
-  - IP-ASN,32934   # Meta Platforms, Inc. (Facebook/WA)
-  - IP-ASN,63293   # Facebook
-  - IP-ASN,54115   # Meta Edge (Server terdekat di Asia)
+  # --- [3] IP-CIDR GLOBAL (Backbone Meta Infrastructure) ---
+  # Jalur IP tetap untuk memastikan koneksi ke server pusat tidak terputus
+  - IP-CIDR,18.192.0.0/15,no-resolve
+  - IP-CIDR,18.196.0.0/15,no-resolve
+  - IP-CIDR,31.13.24.0/21,no-resolve
+  - IP-CIDR,31.13.64.0/18,no-resolve
+  - IP-CIDR,157.240.0.0/16,no-resolve
+  - IP-CIDR,173.252.64.0/18,no-resolve
+  - IP-CIDR,204.15.20.0/22,no-resolve
 
-  # --- LAYER 3: IP-CIDR ---
-  - IP-CIDR,18.192.0.0/15
-  - IP-CIDR,18.196.0.0/15
-  - IP-CIDR,31.13.24.0/21
-  - IP-CIDR,157.240.0.0/16
-  - IP-CIDR,173.252.64.0/18
+  # --- [4] ASN LOCKDOWN (The Ultimate Security) ---
+  # Mengunci seluruh gedung Meta (Facebook, WA, IG) agar tidak ada yang bocor
+  - IP-ASN,32934,no-resolve  # Meta Platforms, Inc.
+  - IP-ASN,63293,no-resolve  # Facebook
