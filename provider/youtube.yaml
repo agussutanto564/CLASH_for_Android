@@ -1,19 +1,31 @@
 payload:
-  # --- LAYER 1: DOMAINS ---
+  # --- [1] MAIN INTERFACE (Akun, Like, Komentar, Notif) ---
   - DOMAIN-SUFFIX,youtube.com
   - DOMAIN-SUFFIX,youtube.net
-  - DOMAIN-SUFFIX,googlevideo.com
-  - DOMAIN-SUFFIX,ytimg.com
-  - DOMAIN-SUFFIX,ggpht.com
+  - DOMAIN-SUFFIX,youtubei.googleapis.com
+  - DOMAIN-SUFFIX,ytimg.com        # Thumbnail & Foto Profil
+  - DOMAIN-SUFFIX,ytimg.l.google.com
+  - DOMAIN-SUFFIX,nhacuatui.com
+  - DOMAIN-SUFFIX,googlevideo.com   # Jalur Utama Video
+  - DOMAIN-SUFFIX,ggpht.com        # Gambar di Tab Komunitas
+
+  # --- [2] YOUTUBE SHORTS & ADS BYPASS (Anti-Stutter) ---
   - DOMAIN-KEYWORD,youtube
   - DOMAIN-KEYWORD,google-video
+  - DOMAIN-KEYWORD,ytimg
+  - DOMAIN-KEYWORD,yt-video
 
-  # --- LAYER 2: ASN (Tanpa no-resolve) ---
-  - IP-ASN,15169   # Google LLC (Utama)
-  - IP-ASN,36040   # Google Cloud
-  - IP-ASN,43515   # Google Global Cache (GGC)
+  # --- [3] GOOGLE INFRASTRUCTURE (Notifikasi & History) ---
+  # Menjamin notifikasi masuk detik itu juga & history tidak macet
+  - DOMAIN-SUFFIX,google.com
+  - DOMAIN-SUFFIX,googleapis.com
+  - DOMAIN-SUFFIX,gstatic.com
+  - DOMAIN-SUFFIX,l.google.com
+  - DOMAIN-SUFFIX,gvt1.com         # Update Komponen Player
 
-  # --- LAYER 3: IP-CIDR (Backbone Google) ---
-  - IP-CIDR,172.217.0.0/16
-  - IP-CIDR,142.250.0.0/15
-  - IP-CIDR,216.58.192.0/19
+  # --- [4] ASN LOCKDOWN (The "God Net" Layer) ---
+  # Mengunci seluruh jalur server Google di seluruh dunia.
+  # Apapun domainnya, jika punya Google, masuk jalur ini.
+  - IP-ASN,15169,no-resolve  # Google LLC (Utama)
+  - IP-ASN,16509,no-resolve  # Amazon Data Services (Beberapa CDN Google)
+  - IP-ASN,36492,no-resolve  # Google Global Cache
