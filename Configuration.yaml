@@ -42,8 +42,8 @@ proxy-providers:
   Akun-VPN:
     type: http
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/vpn.yaml"
-    interval: 3600
-    path: "./providers/vpn.yaml"
+    interval: 86400
+    path: "./provider/vpn.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
@@ -62,21 +62,21 @@ rule-providers:
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/tiktok.yaml"
     interval: 86400
-    path: "./providers/tiktok.yaml"
+    path: "./provider/tiktok.yaml"
 
   Rule_WhatsApp:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/whatsapp.yaml"
     interval: 86400
-    path: "./providers/whatsapp.yaml"
+    path: "./provider/whatsapp.yaml"
 
   Rule_YouTube:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
     interval: 86400
-    path: "./providers/youtube.yaml"
+    path: "./provider/youtube.yaml"
 
 rules:
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
