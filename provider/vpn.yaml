@@ -1,6 +1,6 @@
 proxies:
 - name: VMess_TLS_9c988e0a-ba1a-558b-87d2-7a1c273cc56d
-  server: id-atha001.kegiatanja.my.id
+  server: elena.unnes.ac.id
   port: 443
   type: vmess
   uuid: 9c988e0a-ba1a-558b-87d2-7a1c273cc56d
@@ -8,10 +8,10 @@ proxies:
   cipher: auto
   tls: true
   skip-cert-verify: true
-  servername: id-atha001.kegiatanja.my.id
+  servername: elena.unnes.ac.id.id-atha001.kegiatanja.my.id
   network: ws
   ws-opts:
     path: /xrayvmess
     headers:
-      Host: id-atha001.kegiatanja.my.id
+      Host: elena.unnes.ac.id.id-atha001.kegiatanja.my.id
   udp: true
