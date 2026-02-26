@@ -1,4 +1,10 @@
 # --- CONFIGURATION OPTIMIZED (agussutanto564) ---
+# Tambahkan link database GeoX Meta agar IP-ASN terbaca sempurna
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
+
 port: 7890
 socks-port: 7891
 redir-port: 7892
@@ -6,7 +12,7 @@ mixed-port: 7893
 tproxy-port: 7895
 ipv6: false
 mode: rule
-log-level: silent
+log-level: info # Ubah ke info agar Anda bisa melihat log jika ada error
 allow-lan: true
 unified-delay: true
 tcp-fast-open: false
@@ -14,13 +20,20 @@ tcp-concurrent: true
 external-controller: 127.0.0.1:9090
 keep-alive-interval: 15
 
-# --- DNS SETTINGS (Dewa Mode Enabled) ---
+# --- DNS SETTINGS ---
 dns:
   enable: true
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
+  # Penambahan sniffing internal DNS
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 'https://dns.google/dns-query'
+  proxy-server-nameserver:
+    - 8.8.8.8
   fake-ip-filter:
     - '+.google.com'
     - '+.gstatic.com'
@@ -28,22 +41,15 @@ dns:
     - '+.tiktok.com'
     - '+.tiktokv.com'
     - '+.tik-tokapi.com'
-  default-nameserver:
-    - 8.8.8.8
-    - 1.1.1.1
-  nameserver:
-    - 8.8.8.8
-    - 1.1.1.1
-    - 'https://dns.google/dns-query'
 
-# --- SNIFFER (QUIC Port Included) ---
+# --- SNIFFER ---
 sniffer:
   enable: true
   sniff:
     TLS:
       ports: [443, 8443]
     QUIC:
-      ports: [443, 8443]
+      ports: [443, 8443] # Penting untuk YouTube & TikTok
     HTTP:
       ports: [80, 8080-8880]
 
@@ -62,9 +68,6 @@ proxy-providers:
 proxy-groups:
   - name: VPN
     type: select
-    # Tolerance tetap ada sebagai parameter kualitas koneksi tunggal Anda
-    url: http://cp.cloudflare.com/generate_204
-    interval: 150
     use:
       - Akun-VPN
 
@@ -91,6 +94,7 @@ rule-providers:
     path: "./provider/youtube.yaml"
 
 rules:
+  # Urutan: LAN/Direct dulu -> Rule Specific -> GeoIP/Match
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
