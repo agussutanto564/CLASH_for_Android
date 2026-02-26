@@ -1,17 +1,17 @@
 proxies:
-- name: VMess_TLS_069684f2-13ef-528a-80b3-9d04ee7fe4e6
+- name: MONYET
   server: support.udemy.com
   port: 443
   type: vmess
-  uuid: 069684f2-13ef-528a-80b3-9d04ee7fe4e6
+  uuid: 05cbaa82-7ada-5cf3-a3b2-11ff208c0061
   alterId: 0
   cipher: auto
   tls: true
   skip-cert-verify: true
-  servername: support.udemy.com.id-atha001.kegiatanja.my.id
+  servername: id-atha001.kegiatanja.my.id
   network: ws
   ws-opts:
     path: /xrayvmess
     headers:
-      Host: support.udemy.com.id-atha001.kegiatanja.my.id
+      Host: id-atha001.kegiatanja.my.id
   udp: true
