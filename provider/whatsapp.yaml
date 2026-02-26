@@ -1,29 +1,32 @@
 payload:
-  # WHATSAPP
-  - DOMAIN-SUFFIX,fna.whatsapp.net
-  - DOMAIN-SUFFIX,wa.me
-  - DOMAIN-SUFFIX,whatsapp-plus.info
-  - DOMAIN-SUFFIX,whatsapp-plus.me
-  - DOMAIN-SUFFIX,whatsapp-plus.net
-  - DOMAIN-SUFFIX,whatsapp.cc
+  # --- [1] BEHAVIORAL DOMAINS (Notifikasi & Pesan Cepat) ---
   - DOMAIN-SUFFIX,whatsapp.com
-  - DOMAIN-SUFFIX,whatsapp.info
   - DOMAIN-SUFFIX,whatsapp.net
   - DOMAIN-SUFFIX,whatsapp.org
-  - DOMAIN-SUFFIX,whatsapp.tv
-  - DOMAIN-SUFFIX,whatsappbrand.com
-  - DST-PORT,3478
-  - DST-PORT,4244
-  - DST-PORT,5222
-  - DST-PORT,5223
-  - DST-PORT,5228
-  - DST-PORT,5288
-  - DST-PORT,5242
-  - DST-PORT,5349
-  - DST-PORT,34784
-  - DST-PORT,45395
-  - DST-PORT,50318
-  - DST-PORT,59234
-  - DST-PORT,12222
-  - DST-PORT,11112
-  - DST-PORT,25566
+  - DOMAIN-SUFFIX,fbcdn.net        # Hosting gambar & video story
+  - DOMAIN-SUFFIX,facebook.com     # Infrastruktur push notif
+  - DOMAIN-SUFFIX,facebook.net
+  - DOMAIN-SUFFIX,fb.me
+
+  # --- [2] VOICE & VIDEO CALL (Anti-Lag & Anti-Reconnecting) ---
+  # Menangkap trafik STUN/TURN yang digunakan WhatsApp untuk Call
+  - DOMAIN-KEYWORD,whatsapp-plus
+  - DOMAIN-KEYWORD,whatsapp-cdn
+  - DOMAIN-KEYWORD,wa-voip
+  - DOMAIN-KEYWORD,wa-static
+  - DOMAIN-KEYWORD,wa.me
+
+  # --- [3] IP-CIDR GLOBAL (Backbone Meta Infrastructure) ---
+  # Jalur IP tetap untuk memastikan koneksi ke server pusat tidak terputus
+  - IP-CIDR,18.192.0.0/15,no-resolve
+  - IP-CIDR,18.196.0.0/15,no-resolve
+  - IP-CIDR,31.13.24.0/21,no-resolve
+  - IP-CIDR,31.13.64.0/18,no-resolve
+  - IP-CIDR,157.240.0.0/16,no-resolve
+  - IP-CIDR,173.252.64.0/18,no-resolve
+  - IP-CIDR,204.15.20.0/22,no-resolve
+
+  # --- [4] ASN LOCKDOWN (The Ultimate Security) ---
+  # Mengunci seluruh gedung Meta (Facebook, WA, IG) agar tidak ada yang bocor
+  - IP-ASN,32934,no-resolve  # Meta Platforms, Inc.
+  - IP-ASN,63293,no-resolve  # Facebook
