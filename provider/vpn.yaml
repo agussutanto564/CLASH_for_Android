@@ -1,9 +1,9 @@
 proxies:
-- name: MONYET
-  server: support.udemy.com
+- name: VMess_TLS_9c988e0a-ba1a-558b-87d2-7a1c273cc56d
+  server: id-atha001.kegiatanja.my.id
   port: 443
   type: vmess
-  uuid: 05cbaa82-7ada-5cf3-a3b2-11ff208c0061
+  uuid: 9c988e0a-ba1a-558b-87d2-7a1c273cc56d
   alterId: 0
   cipher: auto
   tls: true
