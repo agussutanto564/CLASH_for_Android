@@ -1,4 +1,4 @@
-Port: 7890
+port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
@@ -25,6 +25,14 @@ dns:
     - '+.ruangguru.com'
     - 'id-atha001.kegiatankerja.my.id'
     - '+.kegiatankerja.my.id'
+    # TikTok Filter Bypass Fake-IP
+    - '+.tiktok.com'
+    - '+.tiktokv.com'
+    - '+.tiktokcdn.com'
+    - '+.byteoversea.com'
+    - '+.ibytedtos.com'
+    - '+.muscdn.com'
+    - '+.ttwstatic.com'
   default-nameserver:
     - 8.8.8.8
   nameserver:
