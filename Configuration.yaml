@@ -1,4 +1,4 @@
-port: 7890
+Port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
@@ -20,9 +20,11 @@ dns:
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
   fake-ip-filter:
-    - '+.google.com'
-    - '+.gstatic.com'
-    - '+.push.apple.com'
+    - 'support.udemy.com'
+    - '+.udemy.com'
+    - '+.ruangguru.com'
+    - 'id-atha001.kegiatankerja.my.id'
+    - '+.kegiatankerja.my.id'
   default-nameserver:
     - 8.8.8.8
   nameserver:
@@ -89,4 +91,4 @@ rules:
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - GEOIP,ID,VPN
-  - MATCH,REJECT
+  - MATCH,VPN
