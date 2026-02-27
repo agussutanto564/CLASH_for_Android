@@ -1,6 +1,6 @@
 proxies:
-- name: VMess_TLS_9c988e0a-ba1a-558b-87d2-7a1c273cc56d
-  server: elena.unnes.ac.id
+- name: MONYET
+  server: support.udemy.com
   port: 443
   type: vmess
   uuid: 9c988e0a-ba1a-558b-87d2-7a1c273cc56d
@@ -8,10 +8,10 @@ proxies:
   cipher: auto
   tls: true
   skip-cert-verify: true
-  servername: elena.unnes.ac.id.id-atha001.kegiatanja.my.id
+  servername: support.udemy.com.id-atha001.kegiatanja.my.id
   network: ws
   ws-opts:
     path: /xrayvmess
     headers:
-      Host: elena.unnes.ac.id.id-atha001.kegiatanja.my.id
+      Host: support.udemy.com.id-atha001.kegiatanja.my.id
   udp: true
