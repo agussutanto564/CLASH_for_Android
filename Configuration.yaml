@@ -89,4 +89,4 @@ rules:
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - GEOIP,ID,VPN
-  - MATCH,VPN
+  - MATCH,REJECT
