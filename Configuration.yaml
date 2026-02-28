@@ -20,6 +20,17 @@ dns:
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
   fake-ip-filter:
+    # --- Tambahan Fake IP Filter ---
+    - 'connectivitycheck.gstatic.com'
+    - 'connectivitycheck.android.com'
+    - 'msftconnecttest.com'
+    - 'msftncsi.com'
+    - 'clients3.google.com'
+    - '*.whatsapp.net'
+    - '*.whatsapp.com'
+    - '*.google.com'
+    - '*.kemdikbud.go.id'
+    # --- Akhir Tambahan ---
     - 'domain:*.xl.co.id'
     - 'domain:*.xlaxiata.id'
     - 'domain:*.myxl.co.id'
