@@ -267,6 +267,12 @@ rule-providers:
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
     interval: 86400
     path: "./provider/youtube.yaml"
+  Rule_MyXL:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/myxl.yaml"
+    interval: 86400
+    path: "./provider/myxl.yaml"
 
 rules:
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
@@ -275,5 +281,6 @@ rules:
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
+  - RULE-SET,Rule_MyXL,DIRECT
   - GEOIP,ID,VPN
   - MATCH,VPN
