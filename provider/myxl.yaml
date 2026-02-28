@@ -1,0 +1,29 @@
+payload:
+  # [Sistem Android - Bypass by App Name]
+  - PROCESS-NAME,com.apps.MyXL
+  - PROCESS-NAME,com.axis.net
+
+  # [Domain Utama XL & Axis]
+  - DOMAIN-SUFFIX,xl.co.id
+  - DOMAIN-SUFFIX,xlaxiata.id
+  - DOMAIN-SUFFIX,myxl.co.id
+  - DOMAIN-SUFFIX,axisnet.id
+  - DOMAIN-KEYWORD,myxl
+  - DOMAIN-KEYWORD,xlaxiata
+  - DOMAIN-KEYWORD,axisnet
+
+  # [Infrastruktur API & Backend]
+  - DOMAIN-SUFFIX,api.xl.co.id
+  - DOMAIN-SUFFIX,auth.xl.co.id
+  - DOMAIN-SUFFIX,api-myxl.xl.co.id
+  - DOMAIN-SUFFIX,prod-myxl.xlaxiata.id
+  
+  # [Analytics & Tracking]
+  - DOMAIN-KEYWORD,crashlytics
+  - DOMAIN-KEYWORD,firebaseio
+  - DOMAIN-SUFFIX,app-measurement.com
+
+  # [IP Range Server XL]
+  - IP-CIDR,112.215.0.0/16
+  - IP-CIDR,202.152.240.0/20
+  - IP-CIDR,101.255.0.0/16
