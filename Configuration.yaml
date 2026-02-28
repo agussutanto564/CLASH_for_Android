@@ -19,7 +19,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
-  # DNS AdGuard & NextDNS untuk pre-filtering iklan level DNS
+  # DNS Anti-Iklan tingkat tinggi (DoH)
   nameserver:
     - https://dns.adguard-dns.com/dns-query
     - https://dns.nextdns.io/
@@ -260,7 +260,7 @@ proxy-groups:
   - name: VPN
     type: select
     proxies:
-      - REJECT # Tambahkan opsi REJECT di dalam grup VPN untuk manual blocking
+      - REJECT
     use:
       - Akun-VPN
     url: http://cp.cloudflare.com/generate_204
@@ -269,10 +269,10 @@ proxy-groups:
     timeout: 2000
 
 rule-providers:
-  # --- Provider Adsblock Ekstrim ---
+  # --- Provider Adsblock Ekstrim (Fixed) ---
   Global_Ads:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/reject.txt"
     path: ./ruleset/global_ads.yaml
     interval: 86400
@@ -286,7 +286,7 @@ rule-providers:
 
   Privacy_Tracker:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/privacy.txt"
     path: ./ruleset/privacy.yaml
     interval: 86400
@@ -321,25 +321,26 @@ rule-providers:
     path: "./provider/myxl.yaml"
 
 rules:
-  # 1. Local & LAN Bypass
+  # 1. Local Bypass
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # 2. EKSEKUSI ADSBLOCK (Harus di atas agar iklan terputus duluan)
+  # 2. AUTO-BLOCK ADS (Blokir Iklan Otomatis)
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,telemetry,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
+  - DOMAIN-KEYWORD,ads,REJECT
   - RULE-SET,Global_Ads,REJECT
   - RULE-SET,Asia_Indo_Ads,REJECT
   - RULE-SET,Privacy_Tracker,REJECT
 
-  # 3. Rule Aplikasi
+  # 3. Rules Aplikasi
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MyXL,DIRECT
   
-  # 4. Final Route
+  # 4. Final Match
   - GEOIP,ID,VPN
   - MATCH,VPN
