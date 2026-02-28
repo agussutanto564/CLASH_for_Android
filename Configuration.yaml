@@ -19,16 +19,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
-  # DNS Anti-Iklan AdGuard & NextDNS
-  nameserver:
-    - https://dns.adguard-dns.com/dns-query
-    - https://dns.nextdns.io/
-    - 8.8.8.8
-    - 1.1.1.1
-  default-nameserver:
-    - 8.8.8.8
   fake-ip-filter:
-    # --- Tambahan Fake IP Filter ---
     - 'connectivitycheck.gstatic.com'
     - 'connectivitycheck.android.com'
     - 'msftconnecttest.com'
@@ -38,7 +29,6 @@ dns:
     - '*.whatsapp.com'
     - '*.google.com'
     - '*.kemdikbud.go.id'
-    # --- Akhir Tambahan ---
     - 'domain:*.xl.co.id'
     - 'domain:*.xlaxiata.id'
     - 'domain:*.myxl.co.id'
@@ -237,6 +227,11 @@ dns:
     - 'domain:-hs.pstatp.com'
     - 'domain:-tos.pstatp.com'
     - 'domain:-mus.pstatp.com'
+  default-nameserver:
+    - 8.8.8.8
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
 
 sniffer:
   enable: true
@@ -261,8 +256,6 @@ proxy-providers:
 proxy-groups:
   - name: VPN
     type: select
-    proxies:
-      - REJECT
     use:
       - Akun-VPN
     url: http://cp.cloudflare.com/generate_204
@@ -271,29 +264,29 @@ proxy-groups:
     timeout: 2000
 
 rule-providers:
-  # LINK PERBAIKAN (MENGGUNAKAN .YAML AGAR TIDAK ERROR PAYLOAD FIELD)
-  Global_Ads:
+  # --- RULES ADS BLOCK MULAI SINI ---
+  Ads_Indo:
     type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/reject.yaml"
-    path: ./ruleset/global_ads.yaml
+    behavior: classical
+    url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/abpindo.yaml"
+    path: ./provider/ads_indo.yaml
     interval: 86400
 
-  Asia_Indo_Ads:
+  Ads_Global:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/ads.yaml"
-    path: ./ruleset/anti_ad.yaml
+    url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml"
+    path: ./provider/ads_global.yaml
     interval: 86400
 
-  Privacy_Tracker:
+  Ads_Mobile:
     type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/privacy.yaml"
-    path: ./ruleset/privacy.yaml
+    behavior: classical
+    url: "https://raw.githubusercontent.com/alfatihart/clashBlock/main/adaway.yaml"
+    path: ./provider/ads_mobile.yaml
     interval: 86400
+  # --- RULES ADS BLOCK SELESAI ---
 
-  # Provider Asli Payload Kamu
   Rule_TikTok:
     type: http
     behavior: classical
@@ -323,22 +316,22 @@ rule-providers:
     path: "./provider/myxl.yaml"
 
 rules:
-  # Urutan Rules Sesuai Prioritas Adsblock
+  # 1. Bypass Lokal & LAN
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
-  
-  # BLOKIR IKLAN SEBELUM VPN
-  - RULE-SET,Global_Ads,REJECT
-  - RULE-SET,Asia_Indo_Ads,REJECT
-  - RULE-SET,Privacy_Tracker,REJECT
 
-  # RULES APLIKASI ASLI PAYLOAD
+  # 2. EKSEKUSI ADS BLOCK (Wajib di atas agar iklan terpotong duluan)
+  - RULE-SET,Ads_Indo,REJECT
+  - RULE-SET,Ads_Global,REJECT
+  - RULE-SET,Ads_Mobile,REJECT
+
+  # 3. App Rules
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MyXL,DIRECT
-  
-  # FINAL MATCH
+
+  # 4. Global Geo & Match
   - GEOIP,ID,VPN
   - MATCH,VPN
