@@ -19,6 +19,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
+  # DNS Anti-Iklan AdGuard & NextDNS
   nameserver:
     - https://dns.adguard-dns.com/dns-query
     - https://dns.nextdns.io/
@@ -27,6 +28,7 @@ dns:
   default-nameserver:
     - 8.8.8.8
   fake-ip-filter:
+    # --- Tambahan Fake IP Filter ---
     - 'connectivitycheck.gstatic.com'
     - 'connectivitycheck.android.com'
     - 'msftconnecttest.com'
@@ -35,10 +37,206 @@ dns:
     - '*.whatsapp.net'
     - '*.whatsapp.com'
     - '*.google.com'
+    - '*.kemdikbud.go.id'
+    # --- Akhir Tambahan ---
     - 'domain:*.xl.co.id'
     - 'domain:*.xlaxiata.id'
     - 'domain:*.myxl.co.id'
     - 'domain:*.axisnet.id'
+    - 'domain:+.xl.co.id'
+    - 'domain:+.xlaxiata.id'
+    - 'domain:myxl.co.id'
+    - 'domain:axisnet.id'
+    - 'domain:support.udemy.com'
+    - 'domain:+.udemy.com'
+    - 'domain:+.ruangguru.com'
+    - 'domain:id-atha001.kegiatankerja.my.id'
+    - 'domain:+.kegiatankerja.my.id'
+    - 'domain:tiktok.com'
+    - 'domain:tiktokv.com'
+    - 'domain:tiktokcdn.com'
+    - 'domain:tiktokstatic.com'
+    - 'domain:tiktokd.org'
+    - 'domain:tiktokv.us'
+    - 'domain:tik-tokapi.com'
+    - 'domain:musical.ly'
+    - 'domain:muscdn.com'
+    - 'domain:musemuse.cn'
+    - 'domain:m.tiktok.com'
+    - 'domain:id.tiktok.com'
+    - 'domain:v16-webapp-prime.tiktok.com'
+    - 'domain:webcast.tiktok.com'
+    - 'domain:sec.tiktok.com'
+    - 'domain:verification.tiktok.com'
+    - 'domain:api-m.tiktok.com'
+    - 'domain:api16-core-c-useast1a.tiktokv.com'
+    - 'domain:mon.tiktokv.com'
+    - 'domain:log-va.tiktokv.com'
+    - 'domain:rtlog-va.tiktokv.com'
+    - 'domain:webcast-va.tiktokv.com'
+    - 'domain:webcast-sg.tiktokv.com'
+    - 'domain:webcast-v6.tiktokv.com'
+    - 'domain:tiktokcdn-eu.com'
+    - 'domain:tiktokcdn-us.com'
+    - 'domain:tiktokcdn-sea.com'
+    - 'domain:p16-va.tiktokcdn.com'
+    - 'domain:p16-sign-sg.tiktokcdn.com'
+    - 'domain:p16-webcast.tiktokcdn.com'
+    - 'domain:tiktok-v6.com'
+    - 'domain:byteoversea.com'
+    - 'domain:byteoversea.net'
+    - 'domain:ttoversea.net'
+    - 'domain:ttoverseaus.net'
+    - 'domain:log.byteoversea.com'
+    - 'domain:tiktok-v6-id.byteoversea.com'
+    - 'domain:tiktok-v6-sg.byteoversea.com'
+    - 'domain:byteimg.com'
+    - 'domain:ibyteimg.com'
+    - 'domain:byteimg-oversea.com'
+    - 'domain:p16-tiktok-sg.ibyteimg.com'
+    - 'domain:p16-tiktok-va.ibyteimg.com'
+    - 'domain:p16-webcast.ibyteimg.com'
+    - 'domain:p16-tiktok-sign.ibyteimg.com'
+    - 'domain:p16-web-sing.ibyteimg.com'
+    - 'domain:p16-security-sg.ibyteimg.com'
+    - 'domain:ibytedtos.com'
+    - 'domain:pstatp.com'
+    - 'domain:ipstatp.com'
+    - 'domain:sgpstatp.com'
+    - 'domain:flive.pstatp.com'
+    - 'domain:snssdk.com'
+    - 'domain:sgsnssdk.com'
+    - 'domain:isnssdk.com'
+    - 'domain:ttvideo.com'
+    - 'domain:ttwstatic.com'
+    - 'domain:bytegecko.com'
+    - 'domain:bytegecko-i18n.com'
+    - 'domain:bytefcdn.com'
+    - 'domain:bytefcdn-tt.com'
+    - 'domain:bytefcdn-oversea.com'
+    - 'domain:bytefcdn-static.com'
+    - 'domain:bytefcdn-tt-alpha.com'
+    - 'domain:bytedapm.com'
+    - 'domain:byteintl.net'
+    - 'domain:byteglb.com'
+    - 'domain:byteeffect.com'
+    - 'domain:bytedns.net'
+    - 'domain:byteicdn.com'
+    - 'domain:volces.com'
+    - 'domain:volceingest.com'
+    - 'domain:byteactivity.com'
+    - 'domain:tlivecdn.com'
+    - 'domain:ttlivecdn.com'
+    - 'domain:tiktok-v6-sg.ibyterom.com'
+    - 'domain:bytedance.com'
+    - 'domain:volcengine.com'
+    - 'domain:volcengineapi.com'
+    - 'domain:bytedance.net'
+    - 'domain:byteicdn.net'
+    - 'domain:bytebus.com'
+    - 'domain:bytetos.com'
+    - 'domain:ttads.com'
+    - 'domain:bytegoofy.com'
+    - 'domain:bytedanceapi.com'
+    - 'domain:bytepond.com'
+    - 'domain:bytedance.io'
+    - 'domain:bytemod.com'
+    - 'domain:bytehtest.com'
+    - 'domain:tiktokv.com.edgesuite.net'
+    - 'domain:tiktok.com.edgesuite.net'
+    - 'domain:tiktokcdn-com.edgekey.net'
+    - 'domain:sf16-muse-va.ibytedtos.com'
+    - 'domain:sf16-sg.ibytedtos.com'
+    - 'domain:v16.tiktokcdn.com'
+    - 'domain:v19.tiktokcdn.com'
+    - 'domain:v21.tiktokcdn.com'
+    - 'domain:tiktok-all-va.byteoversea.com'
+    - 'domain:bytevfs.com'
+    - 'domain:effecthouse.com'
+    - 'domain:capcut.com'
+    - 'domain:byted-static.com'
+    - 'domain:byteimg.com.akamaized.net'
+    - 'domain:tiktokv.akamaized.net'
+    - 'domain:pangle.io'
+    - 'domain:getaglobal.com'
+    - 'domain:byteoversea.com.edgesuite.net'
+    - 'domain:bdurl.net'
+    - 'domain:bytedance.com.cdn.cloudflare.net'
+    - 'domain:bytegecko.net'
+    - 'domain:bytetos.net'
+    - 'domain:byte-static.com'
+    - 'domain:volcengine.net'
+    - 'domain:volces.net'
+    - 'domain:byte-dns.com'
+    - 'domain:bytednsapi.com'
+    - 'domain:is.snssdk.com'
+    - 'domain:look.snssdk.com'
+    - 'domain:ibytedapm.com'
+    - 'domain:tokopedia.com'
+    - 'domain:tokopedia.net'
+    - 'domain:tokope.id'
+    - 'domain:tokopedianow.com'
+    - 'domain:assets-tokopedia.com'
+    - 'domain:aj-cdn.com'
+    - 'domain:go-jek.com'
+    - 'domain:gotocompany.com'
+    - 'domain:go-pay.co.id'
+    - 'domain:midtrans.com'
+    - 'domain:tawk.to'
+    - 'domain:cloudfront.net'
+    - 'domain:tiktokshop.com'
+    - 'domain:ibyteit.com'
+    - 'domain:byteintl.com'
+    - 'domain:byteoversea.i18n.com'
+    - 'domain:sgsnssdk.org'
+    - 'domain:ctobsnssdk.com'
+    - 'domain:go-jek.io'
+    - 'domain:gojekapi.com'
+    - 'domain:gojek.com'
+    - 'domain:go-pay.id'
+    - 'domain:tokopoints.com'
+    - 'domain:tokopedia.com.edgekey.net'
+    - 'domain:tkp.me'
+    - 'domain:tokopediastatic.com'
+    - 'domain:ecom-api-sg.tiktok.com'
+    - 'domain:m-shop.tiktok.com'
+    - 'domain:seller-sg.tiktok.com'
+    - 'domain:seller.tiktok.com'
+    - 'domain:shoppay.tiktok.com'
+    - 'domain:ads-sg.tiktok.com'
+    - 'domain:analytics-sg.tiktok.com'
+    - 'domain:gosend.id'
+    - 'domain:gopay.id'
+    - 'domain:toko.ly'
+    - 'domain:gopay.co.id'
+    - 'domain:ascent.tokopedia.com'
+    - 'domain:promotion.tokopedia.com'
+    - 'domain:akamaized.net'
+    - 'domain:edgecastdns.net'
+    - 'domain:edgecastcdn.net'
+    - 'domain:fastly.net'
+    - 'domain:app-measurement.com'
+    - 'domain:crashlytics.com'
+    - 'domain:myvzw.com'
+    - 'domain:tiktokv.com.edgekey.net'
+    - 'domain:byteoversea.com.edgekey.net'
+    - 'domain:star-tiktok-jp-v6.akamaized.net'
+    - 'domain:m-tiktok-com.akamaized.net'
+    - 'domain:tiktokcdn-us.com.akamaized.net'
+    - 'domain:byteorange.com'
+    - 'domain:bytemover.com'
+    - 'domain:byteconf.com'
+    - 'domain:bytedance.static.com'
+    - 'domain:giphy.com'
+    - 'domain:gvt1.com'
+    - 'domain:worldfcdn.com'
+    - 'domain:-tiktok.byteoversea.com'
+    - 'domain:-tiktokcdn-com'
+    - 'domain:-tt.byteimg.com'
+    - 'domain:-tt-ipv6.byteimg.com'
+    - 'domain:-hs.pstatp.com'
+    - 'domain:-tos.pstatp.com'
+    - 'domain:-mus.pstatp.com'
 
 sniffer:
   enable: true
@@ -73,28 +271,29 @@ proxy-groups:
     timeout: 2000
 
 rule-providers:
-  # Menggunakan format classical untuk stabilitas maksimal di Android
+  # LINK PERBAIKAN (MENGGUNAKAN .YAML AGAR TIDAK ERROR PAYLOAD FIELD)
   Global_Ads:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/reject.txt"
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/reject.yaml"
     path: ./ruleset/global_ads.yaml
     interval: 86400
 
   Asia_Indo_Ads:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/ads.txt"
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/ads.yaml"
     path: ./ruleset/anti_ad.yaml
     interval: 86400
 
   Privacy_Tracker:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/privacy.txt"
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/privacy.yaml"
     path: ./ruleset/privacy.yaml
     interval: 86400
 
+  # Provider Asli Payload Kamu
   Rule_TikTok:
     type: http
     behavior: classical
@@ -124,22 +323,22 @@ rule-providers:
     path: "./provider/myxl.yaml"
 
 rules:
+  # Urutan Rules Sesuai Prioritas Adsblock
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
-
-  # ADSBLOCKING (Eksekusi REJECT)
+  
+  # BLOKIR IKLAN SEBELUM VPN
   - RULE-SET,Global_Ads,REJECT
   - RULE-SET,Asia_Indo_Ads,REJECT
   - RULE-SET,Privacy_Tracker,REJECT
-  - DOMAIN-KEYWORD,ads,REJECT
-  - DOMAIN-KEYWORD,adservice,REJECT
 
-  # App Rules
+  # RULES APLIKASI ASLI PAYLOAD
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MyXL,DIRECT
   
+  # FINAL MATCH
   - GEOIP,ID,VPN
   - MATCH,VPN
