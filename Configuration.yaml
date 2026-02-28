@@ -19,7 +19,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
-  # DNS AdGuard & NextDNS (Filtrasi iklan level tertinggi)
+  # DNS Anti-Iklan (DoH)
   nameserver:
     - https://dns.adguard-dns.com/dns-query
     - https://dns.nextdns.io/
@@ -269,7 +269,7 @@ proxy-groups:
     timeout: 2000
 
 rule-providers:
-  # Link YAML Murni (Menghindari error 'payload field')
+  # FIX: Menggunakan link murni .yaml agar tidak error 'payload field'
   Global_Ads:
     type: http
     behavior: domain
@@ -291,7 +291,6 @@ rule-providers:
     path: ./ruleset/privacy.yaml
     interval: 86400
 
-  # Provider Bawaan Kamu
   Rule_TikTok:
     type: http
     behavior: classical
@@ -321,12 +320,12 @@ rule-providers:
     path: "./provider/myxl.yaml"
 
 rules:
-  # 1. Bypass Lokal
+  # 1. Bypass Local
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # 2. ADSBLOCK EKSTRIM (Otomatis & Tanpa Celah)
+  # 2. ADSBLOCK EKSTRIM
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,telemetry,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
@@ -335,12 +334,12 @@ rules:
   - RULE-SET,Asia_Indo_Ads,REJECT
   - RULE-SET,Privacy_Tracker,REJECT
 
-  # 3. Rule Aplikasi & Layanan
+  # 3. App Rules
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MyXL,DIRECT
   
-  # 4. Final Match
+  # 4. Final Route
   - GEOIP,ID,VPN
   - MATCH,VPN
