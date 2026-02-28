@@ -19,7 +19,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
-  # DNS Anti-Iklan tingkat tinggi (DoH)
+  # DNS AdGuard & NextDNS (Filtrasi iklan level tertinggi)
   nameserver:
     - https://dns.adguard-dns.com/dns-query
     - https://dns.nextdns.io/
@@ -269,11 +269,11 @@ proxy-groups:
     timeout: 2000
 
 rule-providers:
-  # --- Provider Adsblock Ekstrim (Fixed) ---
+  # Link YAML Murni (Menghindari error 'payload field')
   Global_Ads:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/reject.txt"
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/reject.yaml"
     path: ./ruleset/global_ads.yaml
     interval: 86400
 
@@ -286,12 +286,12 @@ rule-providers:
 
   Privacy_Tracker:
     type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/privacy.txt"
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-ruleset/release/privacy.yaml"
     path: ./ruleset/privacy.yaml
     interval: 86400
 
-  # --- Provider Bawaan ---
+  # Provider Bawaan Kamu
   Rule_TikTok:
     type: http
     behavior: classical
@@ -321,12 +321,12 @@ rule-providers:
     path: "./provider/myxl.yaml"
 
 rules:
-  # 1. Local Bypass
+  # 1. Bypass Lokal
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # 2. AUTO-BLOCK ADS (Blokir Iklan Otomatis)
+  # 2. ADSBLOCK EKSTRIM (Otomatis & Tanpa Celah)
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,telemetry,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
@@ -335,7 +335,7 @@ rules:
   - RULE-SET,Asia_Indo_Ads,REJECT
   - RULE-SET,Privacy_Tracker,REJECT
 
-  # 3. Rules Aplikasi
+  # 3. Rule Aplikasi & Layanan
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
