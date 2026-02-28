@@ -18,6 +18,7 @@ dns:
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  drop-old-fake-ip: true # [TAMBAHAN] Menghapus cache fake-ip lama
   listen: 0.0.0.0:7874
   fake-ip-filter:
     - 'connectivitycheck.gstatic.com'
@@ -229,9 +230,12 @@ dns:
     - 'domain:-mus.pstatp.com'
   default-nameserver:
     - 8.8.8.8
-  nameserver:
-    - 8.8.8.8
     - 1.1.1.1
+  nameserver:
+    - https://dns.adguard-dns.com/dns-query # [TAMBAHAN] DNS Anti-Ads
+    - https://dns.google/dns-query
+    - 1.1.1.1
+    - 8.8.8.8
 
 sniffer:
   enable: true
@@ -265,6 +269,13 @@ proxy-groups:
 
 rule-providers:
   # --- RULES ADS BLOCK MULAI SINI ---
+  Ads_AWAvenue: # [TAMBAHAN] Sangat efektif untuk Indo/Global
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/AWAvenue/AWAvenue-Ads-Rule/main/Filters/AWAvenueAdsClash.yaml"
+    path: ./provider/awavenue_ads.yaml
+    interval: 86400
+
   Ads_Indo:
     type: http
     behavior: classical
@@ -321,7 +332,8 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # 2. EKSEKUSI ADS BLOCK (Wajib di atas agar iklan terpotong duluan)
+  # 2. EKSEKUSI ADS BLOCK (Prioritas Utama)
+  - RULE-SET,Ads_AWAvenue,REJECT
   - RULE-SET,Ads_Indo,REJECT
   - RULE-SET,Ads_Global,REJECT
   - RULE-SET,Ads_Mobile,REJECT
