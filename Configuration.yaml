@@ -25,7 +25,7 @@ dns:
   nameserver:
     - https://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
-    - quic://dns.adguard-dns.com # Tambahan: Proteksi level DNS 2026
+    - quic://dns.adguard-dns.com
   fake-ip-filter:
     - 'connectivitycheck.gstatic.com'
     - 'connectivitycheck.android.com'
@@ -266,10 +266,11 @@ proxy-groups:
     timeout: 2000
 
 rule-providers:
+  # Link sudah menggunakan format YAML (.yaml) agar tidak error payload
   Ads_Ultimate:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.yaml"
     path: ./provider/ads_ultimate.yaml
     interval: 86400
   Ads_Indo:
@@ -290,10 +291,10 @@ rule-providers:
     url: "https://raw.githubusercontent.com/alfatihart/clashBlock/main/adaway.yaml"
     path: ./provider/ads_mobile.yaml
     interval: 86400
-  Ads_Annoyance: # Tambahan: Memblokir pop-up/gangguan web
+  Ads_Annoyance:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/annoyance.txt"
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/annoyance.yaml"
     path: ./provider/ads_annoyance.yaml
     interval: 86400
 
@@ -327,7 +328,7 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # --- BENTENG TINGKAT DEWA 2026 (Keyword & Specific) ---
+  # BENTENG UTAMA
   - DOMAIN-KEYWORD,adserver,REJECT
   - DOMAIN-KEYWORD,ad-delivery,REJECT
   - DOMAIN-KEYWORD,ads-system,REJECT
@@ -338,24 +339,19 @@ rules:
   - DOMAIN-SUFFIX,googleadservices.com,REJECT
   - DOMAIN-SUFFIX,googlesyndication.com,REJECT
   - DOMAIN-SUFFIX,app-measurement.com,REJECT
-  - DOMAIN-SUFFIX,analytics.google.com,REJECT
   - DOMAIN-SUFFIX,ads.youtube.com,REJECT
   - DOMAIN-SUFFIX,crashlytics.com,REJECT
-  - DOMAIN-SUFFIX,applovin.com,REJECT
-  - DOMAIN-SUFFIX,applvn.com,REJECT
-  - DOMAIN-SUFFIX,unityads.unity3d.com,REJECT
   - DOMAIN-SUFFIX,pangle.io,REJECT
   - DOMAIN-SUFFIX,snssdk.com,REJECT
-  - DOMAIN-SUFFIX,tracking.miui.com,REJECT # Blokir iklan sistem HP
 
-  # --- EKSEKUSI RULE-SET ADS ---
+  # EKSEKUSI PROVIDER
   - RULE-SET,Ads_Ultimate,REJECT
   - RULE-SET,Ads_Indo,REJECT
   - RULE-SET,Ads_Global,REJECT
   - RULE-SET,Ads_Mobile,REJECT
   - RULE-SET,Ads_Annoyance,REJECT
 
-  # --- App Rules ---
+  # APP RULES
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
