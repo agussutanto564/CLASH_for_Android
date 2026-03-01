@@ -261,14 +261,29 @@ proxy-groups:
     use:
       - Akun-VPN
     proxies:
-      - ADS-CONTROL
+      - "ADS-BLOCKER"
 
-  - name: ADS-CONTROL
+  - name: "ADS-BLOCKER"
     type: select
     proxies:
-      - "✅ ADS: ON (REJECT)"
-      - "❌ ADS: OFF (VPN)"
-      - "❌ ADS: OFF (DIRECT)"
+      - "AD-ON"
+      - "AD-OFF-VPN"
+      - "AD-OFF-DIRECT"
+
+  - name: "AD-ON"
+    type: select
+    proxies:
+      - REJECT
+
+  - name: "AD-OFF-VPN"
+    type: select
+    use:
+      - Akun-VPN
+
+  - name: "AD-OFF-DIRECT"
+    type: select
+    proxies:
+      - DIRECT
 
 rule-providers:
   Ads_Ultimate:
@@ -331,27 +346,26 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # PERBAIKAN: Target rule harus mengarah ke nama Group (ADS-CONTROL)
-  - DOMAIN-KEYWORD,adserver,ADS-CONTROL
-  - DOMAIN-KEYWORD,ad-delivery,ADS-CONTROL
-  - DOMAIN-KEYWORD,ads-system,ADS-CONTROL
-  - DOMAIN-SUFFIX,doubleclick.net,ADS-CONTROL
-  - DOMAIN-SUFFIX,googleadservices.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,googlesyndication.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,app-measurement.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,analytics.google.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,ads.youtube.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,crashlytics.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,applovin.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,applvn.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,unityads.unity3d.com,ADS-CONTROL
-  - DOMAIN-SUFFIX,pangle.io,ADS-CONTROL
-  - DOMAIN-SUFFIX,snssdk.com,ADS-CONTROL
+  - DOMAIN-KEYWORD,adserver,ADS-BLOCKER
+  - DOMAIN-KEYWORD,ad-delivery,ADS-BLOCKER
+  - DOMAIN-KEYWORD,ads-system,ADS-BLOCKER
+  - DOMAIN-SUFFIX,doubleclick.net,ADS-BLOCKER
+  - DOMAIN-SUFFIX,googleadservices.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,googlesyndication.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,app-measurement.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,analytics.google.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,ads.youtube.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,crashlytics.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,applovin.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,applvn.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,unityads.unity3d.com,ADS-BLOCKER
+  - DOMAIN-SUFFIX,pangle.io,ADS-BLOCKER
+  - DOMAIN-SUFFIX,snssdk.com,ADS-BLOCKER
 
-  - RULE-SET,Ads_Ultimate,ADS-CONTROL
-  - RULE-SET,Ads_Indo,ADS-CONTROL
-  - RULE-SET,Ads_Global,ADS-CONTROL
-  - RULE-SET,Ads_Mobile,ADS-CONTROL
+  - RULE-SET,Ads_Ultimate,ADS-BLOCKER
+  - RULE-SET,Ads_Indo,ADS-BLOCKER
+  - RULE-SET,Ads_Global,ADS-BLOCKER
+  - RULE-SET,Ads_Mobile,ADS-BLOCKER
 
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
