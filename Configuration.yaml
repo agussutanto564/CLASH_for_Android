@@ -1,4 +1,4 @@
-Port: 7890
+port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
@@ -20,7 +20,6 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
-  # DNS terenkripsi untuk mencegah hijacking iklan oleh ISP
   default-nameserver:
     - 8.8.8.8
     - 1.1.1.1
@@ -257,74 +256,71 @@ proxy-providers:
       timeout: 2000
 
 proxy-groups:
+  # 1. GRUP UTAMA: Pilih Server VPN Anda di sini
   - name: VPN
     type: select
     use:
       - Akun-VPN
-    url: http://cp.cloudflare.com/generate_204
-    interval: 150
-    tolerance: 100
-    timeout: 2000
+    proxies:
+      - ADS-CONTROL
+
+  # 2. GRUP SAKELAR: Kontrol iklan secara mandiri dengan nama yang jelas
+  - name: ADS-CONTROL
+    type: select
+    proxies:
+      - "✅ Iklan: BLOKIR (REJECT)"   # Pilihan default (ON)
+      - "❌ Iklan: MUNCUL (VPN)"      # OFF (Lewat VPN)
+      - "❌ Iklan: MUNCUL (DIRECT)"   # OFF (Lewat Kuota Biasa)
 
 rule-providers:
-  # --- RULES ADS BLOCK ---
   Ads_Ultimate:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
     path: ./provider/ads_ultimate.yaml
     interval: 86400
-
   Ads_Indo:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/abpindo.yaml"
     path: ./provider/ads_indo.yaml
     interval: 86400
-
   Ads_Global:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml"
     path: ./provider/ads_global.yaml
     interval: 86400
-
   Ads_Mobile:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/alfatihart/clashBlock/main/adaway.yaml"
     path: ./provider/ads_mobile.yaml
     interval: 86400
-
-  # --- APP RULES ---
   Rule_TikTok:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/tiktok.yaml"
     interval: 86400
     path: "./provider/tiktok.yaml"
-
   Rule_WhatsApp:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/whatsapp.yaml"
     interval: 86400
     path: "./provider/whatsapp.yaml"
-
   Rule_YouTube:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
     interval: 86400
     path: "./provider/youtube.yaml"
-
   Rule_MyXL:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/myxl.yaml"
     interval: 86400
     path: "./provider/myxl.yaml"
-    
   Rule_MLBB:  
     type: http
     behavior: classical
@@ -338,34 +334,33 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # 2. EKSEKUSI MANUAL ADS (Mencegah Iklan Umum & Tracking)
-  - DOMAIN-KEYWORD,adserver,REJECT
-  - DOMAIN-KEYWORD,ad-delivery,REJECT
-  - DOMAIN-KEYWORD,ads-system,REJECT
-  - DOMAIN-SUFFIX,doubleclick.net,REJECT
-  - DOMAIN-SUFFIX,googleadservices.com,REJECT
-  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
-  - DOMAIN-SUFFIX,app-measurement.com,REJECT
-  - DOMAIN-SUFFIX,analytics.google.com,REJECT
-  - DOMAIN-SUFFIX,ads.youtube.com,REJECT
-  - DOMAIN-SUFFIX,crashlytics.com,REJECT
-  - DOMAIN-SUFFIX,applovin.com,REJECT
-  - DOMAIN-SUFFIX,applvn.com,REJECT
-  - DOMAIN-SUFFIX,unityads.unity3d.com,REJECT
-  - DOMAIN-SUFFIX,pangle.io,REJECT
-  - DOMAIN-SUFFIX,snssdk.com,REJECT
+  # 2. EKSEKUSI MANUAL ADS (Arah ke ADS-CONTROL)
+  - DOMAIN-KEYWORD,adserver,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-KEYWORD,ad-delivery,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-KEYWORD,ads-system,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,doubleclick.net,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,googleadservices.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,googlesyndication.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,app-measurement.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,analytics.google.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,ads.youtube.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,crashlytics.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,applovin.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,applvn.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,unityads.unity3d.com,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,pangle.io,"✅ Iklan: BLOKIR (REJECT)"
+  - DOMAIN-SUFFIX,snssdk.com,"✅ Iklan: BLOKIR (REJECT)"
 
-  # 3. EKSEKUSI RULE-SET ADS
-  - RULE-SET,Ads_Ultimate,REJECT
-  - RULE-SET,Ads_Indo,REJECT
-  - RULE-SET,Ads_Global,REJECT
-  - RULE-SET,Ads_Mobile,REJECT
+  # 3. EKSEKUSI RULE-SET ADS (Arah ke ADS-CONTROL)
+  - RULE-SET,Ads_Ultimate,ADS-CONTROL
+  - RULE-SET,Ads_Indo,ADS-CONTROL
+  - RULE-SET,Ads_Global,ADS-CONTROL
+  - RULE-SET,Ads_Mobile,ADS-CONTROL
 
   # 4. App Rules
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
-  - RULE-SET,Rule_MyXL,DIRECT
   - RULE-SET,Rule_MyXL,DIRECT
   - RULE-SET,Rule_MLBB,VPN
   
