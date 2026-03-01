@@ -256,7 +256,7 @@ proxy-providers:
       timeout: 2000
 
 proxy-groups:
-  # TAB 1: Isinya server VPN Anda + pilihan ADS-OFF
+  # SATU-SATUNYA TAB DI LAYAR UTAMA
   - name: VPN
     type: select
     use:
@@ -264,20 +264,12 @@ proxy-groups:
     proxies:
       - ADS-OFF
 
-  # TAB 2: Pusat kontrol Adblock
-  - name: ADS-BLOCKER
-    type: select
-    proxies:
-      - REJECT
-      - DIRECT
-      - VPN
-
-  # Grup ini disembunyikan agar TIDAK muncul tab-nya di atas
+  # Grup ini disembunyikan agar tab kedua tidak muncul di atas
   - name: ADS-OFF
     type: select
     hidden: true
-    proxies:
-      - DIRECT
+    use:
+      - Akun-VPN
 
 rule-providers:
   Ads_Ultimate:
@@ -322,12 +314,6 @@ rule-providers:
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
     interval: 86400
     path: "./provider/youtube.yaml"
-  Rule_MyXL:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/myxl.yaml"
-    interval: 86400
-    path: "./provider/myxl.yaml"
   Rule_MLBB:  
     type: http
     behavior: classical
@@ -340,17 +326,18 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # Iklan lari ke grup ADS-BLOCKER
-  - RULE-SET,Ads_Ultimate,ADS-BLOCKER
-  - RULE-SET,Ads_Indo,ADS-BLOCKER
-  - RULE-SET,Ads_Global,ADS-BLOCKER
-  - RULE-SET,Ads_Mobile,ADS-BLOCKER
+  # LOGIKA 1 TAB:
+  # Pilih Server -> Iklan REJECT (Mati)
+  # Pilih ADS-OFF -> Iklan ikut jalur VPN (Tetap gratis & Iklan muncul)
+  - RULE-SET,Ads_Ultimate,REJECT
+  - RULE-SET,Ads_Indo,REJECT
+  - RULE-SET,Ads_Global,REJECT
+  - RULE-SET,Ads_Mobile,REJECT
 
-  # Aplikasi lari ke grup VPN (bisa pilih server atau ADS-OFF)
+  # Aplikasi
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
-  - RULE-SET,Rule_MyXL,DIRECT
   - RULE-SET,Rule_MLBB,VPN
   
   - GEOIP,ID,VPN
