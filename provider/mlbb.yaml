@@ -1,0 +1,93 @@
+payload:
+  # --- [ PRIORITAS 1: KEYWORD SEARCH ] ---
+  # Menangkap semua traffic yang mengandung kata kunci utama secara instan
+  - DOMAIN-KEYWORD,mobilelegends
+  - DOMAIN-KEYWORD,moonton
+  - DOMAIN-KEYWORD,youngjoygame
+  - DOMAIN-KEYWORD,settlement-mobilelegends
+  - DOMAIN-KEYWORD,log-mobilelegends
+  - DOMAIN-KEYWORD,disbursement-mobilelegends
+  - DOMAIN-KEYWORD,intl-game
+  - DOMAIN-KEYWORD,akamai
+  - DOMAIN-KEYWORD,volcano
+  - DOMAIN-KEYWORD,gcore
+
+  # --- [ PRIORITAS 2: CORE BATTLE & AUTH ] ---
+  # Server utama game dan login
+  - DOMAIN-SUFFIX,mobilelegends.com
+  - DOMAIN-SUFFIX,moonton.com
+  - DOMAIN-SUFFIX,moontonapi.com
+  - DOMAIN-SUFFIX,moontonauth.com
+  - DOMAIN-SUFFIX,youngjoygame.com
+  - DOMAIN-SUFFIX,world.mobilelegends.com
+  - DOMAIN-SUFFIX,mbtt.moonton.com
+  - DOMAIN-SUFFIX,play.googleapis.com
+  - DOMAIN-SUFFIX,payments.google.com
+
+  # --- [ PRIORITAS 3: INFRASTRUKTUR BYTEDANCE & TENCENT ] ---
+  # Pemilik Moonton & penyedia cloud tier-1
+  - DOMAIN-SUFFIX,bytedance.com
+  - DOMAIN-SUFFIX,bytegecko.com
+  - DOMAIN-SUFFIX,byteoversea.com
+  - DOMAIN-SUFFIX,byteoversea.net
+  - DOMAIN-SUFFIX,ibyteimg.com
+  - DOMAIN-SUFFIX,byteimg.com
+  - DOMAIN-SUFFIX,byteicdn.com
+  - DOMAIN-SUFFIX,snssdk.com
+  - DOMAIN-SUFFIX,toutiao.com
+  - DOMAIN-SUFFIX,tencent.com
+  - DOMAIN-SUFFIX,tencentcloudapi.com
+  - DOMAIN-SUFFIX,intlgame.com
+  - DOMAIN-SUFFIX,gcloudcs.com
+  - DOMAIN-SUFFIX,igamecj.com
+  - DOMAIN-SUFFIX,msdk.qq.com
+  - DOMAIN-SUFFIX,bugly.qq.com
+
+  # --- [ PRIORITAS 4: ASSETS & CDN STABILITY ] ---
+  # Untuk download data skin, resource, dan video event
+  - DOMAIN-SUFFIX,akamaized.net
+  - DOMAIN-SUFFIX,alicdn.com
+  - DOMAIN-SUFFIX,aliyun.com
+  - DOMAIN-SUFFIX,cdngp.com
+  - DOMAIN-SUFFIX,volcano-api.com
+  - DOMAIN-SUFFIX,gcore.com
+  - DOMAIN-SUFFIX,fastly.net
+  - DOMAIN-SUFFIX,edgecompute.app
+  - DOMAIN-SUFFIX,ksyun.com
+  - DOMAIN-SUFFIX,mxdwn.com
+  - DOMAIN-SUFFIX,unity.com
+  - DOMAIN-SUFFIX,unity3d.com
+  - DOMAIN-SUFFIX,net-unity3d.com
+  - DOMAIN-SUFFIX,bilicdn.com
+  - DOMAIN-SUFFIX,cloudflare.com
+  - DOMAIN-SUFFIX,vpsvc.com
+
+  # --- [ PRIORITAS 5: VOICE & ANALYTICS ] ---
+  # Fitur tambahan agar tidak stuck 99%
+  - DOMAIN-SUFFIX,agora.io
+  - DOMAIN-SUFFIX,agora.com
+  - DOMAIN-SUFFIX,agoralab.co
+  - DOMAIN-SUFFIX,facebook.com
+  - DOMAIN-SUFFIX,fbcdn.net
+  - DOMAIN-SUFFIX,crashlytics.com
+  - DOMAIN-SUFFIX,tpstelemetry.com
+  - DOMAIN-SUFFIX,p3stat.com
+  - DOMAIN-SUFFIX,vngcloud.vn
+  - DOMAIN-SUFFIX,itop.vng.com.vn
+  - DOMAIN-SUFFIX,googleapis.com
+  - DOMAIN-SUFFIX,gstatic.com
+  - DOMAIN-SUFFIX,firebaseio.com
+
+  # --- [ PRIORITAS 6: IP-CIDR (STABILITY BYPASS) ] ---
+  # Jalur tol langsung ke data center (tanpa resolve DNS)
+  - IP-CIDR,203.205.128.0/17,no-resolve
+  - IP-CIDR,119.28.0.0/13,no-resolve
+  - IP-CIDR,150.109.0.0/16,no-resolve
+  - IP-CIDR,129.226.0.0/16,no-resolve
+  - IP-CIDR,43.129.0.0/16,no-resolve
+  - IP-CIDR,101.32.0.0/16,no-resolve
+  - IP-CIDR,161.117.0.0/16,no-resolve
+  - IP-CIDR,124.156.0.0/15,no-resolve
+  - IP-CIDR,103.136.220.0/22,no-resolve
+  - IP-CIDR,45.249.212.0/22,no-resolve
+  - IP-CIDR,139.159.0.0/16,no-resolve
