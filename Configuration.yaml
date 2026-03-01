@@ -256,7 +256,7 @@ proxy-providers:
       timeout: 2000
 
 proxy-groups:
-  # TAB 1: Menu VPN & Tombol Matikan Adblock
+  # TAB 1: Isinya server VPN Anda + pilihan ADS-OFF
   - name: VPN
     type: select
     use:
@@ -264,15 +264,15 @@ proxy-groups:
     proxies:
       - ADS-OFF
 
-  # TAB 2: Sakelar Pusat Adblock
+  # TAB 2: Pusat kontrol Adblock
   - name: ADS-BLOCKER
     type: select
     proxies:
       - REJECT
-      - VPN
       - DIRECT
+      - VPN
 
-  # Grup ini disembunyikan agar Action Bar bersih
+  # Grup ini disembunyikan agar TIDAK muncul tab-nya di atas
   - name: ADS-OFF
     type: select
     hidden: true
@@ -340,13 +340,13 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # Rule Iklan (Otomatis REJECT jika pilih server VPN)
+  # Iklan lari ke grup ADS-BLOCKER
   - RULE-SET,Ads_Ultimate,ADS-BLOCKER
   - RULE-SET,Ads_Indo,ADS-BLOCKER
   - RULE-SET,Ads_Global,ADS-BLOCKER
   - RULE-SET,Ads_Mobile,ADS-BLOCKER
 
-  # Rule App
+  # Aplikasi lari ke grup VPN (bisa pilih server atau ADS-OFF)
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
