@@ -18,8 +18,14 @@ dns:
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  drop-old-fake-ip: true
   listen: 0.0.0.0:7874
+  # DNS terenkripsi untuk mencegah hijacking iklan oleh ISP
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  nameserver:
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
   fake-ip-filter:
     - 'connectivitycheck.gstatic.com'
     - 'connectivitycheck.android.com'
@@ -228,13 +234,14 @@ dns:
     - 'domain:-hs.pstatp.com'
     - 'domain:-tos.pstatp.com'
     - 'domain:-mus.pstatp.com'
-  default-nameserver:
-    - 8.8.8.8
-    - 1.1.1.1
-  nameserver:
-    - https://dns.adguard-dns.com/dns-query
-    - https://dns.google/dns-query
-    - 1.1.1.1
+
+sniffer:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
 
 proxy-providers:
   Akun-VPN:
@@ -253,21 +260,18 @@ proxy-groups:
     type: select
     use:
       - Akun-VPN
+    url: http://cp.cloudflare.com/generate_204
+    interval: 150
+    tolerance: 100
+    timeout: 2000
 
 rule-providers:
-  # FIX: Menggunakan behavior: classical untuk link AWAvenue terbaru agar terbaca payload-nya
-  Ads_AWAvenue:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml"
-    path: ./provider/awavenue_ads.yaml
-    interval: 86400
-
-  Reject_List:
+  # --- RULES ADS BLOCK ---
+  Ads_Ultimate:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
-    path: ./provider/reject_list.yaml
+    path: ./provider/ads_ultimate.yaml
     interval: 86400
 
   Ads_Indo:
@@ -277,35 +281,84 @@ rule-providers:
     path: ./provider/ads_indo.yaml
     interval: 86400
 
+  Ads_Global:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml"
+    path: ./provider/ads_global.yaml
+    interval: 86400
+
+  Ads_Mobile:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/alfatihart/clashBlock/main/adaway.yaml"
+    path: ./provider/ads_mobile.yaml
+    interval: 86400
+
+  # --- APP RULES ---
   Rule_TikTok:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/tiktok.yaml"
-    path: "./provider/tiktok.yaml"
     interval: 86400
+    path: "./provider/tiktok.yaml"
 
   Rule_WhatsApp:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/whatsapp.yaml"
-    path: "./provider/whatsapp.yaml"
     interval: 86400
+    path: "./provider/whatsapp.yaml"
 
   Rule_YouTube:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
-    path: "./provider/youtube.yaml"
     interval: 86400
+    path: "./provider/youtube.yaml"
+
+  Rule_MyXL:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/myxl.yaml"
+    interval: 86400
+    path: "./provider/myxl.yaml"
 
 rules:
+  # 1. Bypass Lokal & LAN
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
-  - RULE-SET,Ads_AWAvenue,REJECT
-  - RULE-SET,Reject_List,REJECT
+
+  # 2. EKSEKUSI MANUAL ADS (Mencegah Iklan Umum & Tracking)
+  - DOMAIN-KEYWORD,adserver,REJECT
+  - DOMAIN-KEYWORD,ad-delivery,REJECT
+  - DOMAIN-KEYWORD,ads-system,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,googleadservices.com,REJECT
+  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,app-measurement.com,REJECT
+  - DOMAIN-SUFFIX,analytics.google.com,REJECT
+  - DOMAIN-SUFFIX,ads.youtube.com,REJECT
+  - DOMAIN-SUFFIX,crashlytics.com,REJECT
+  - DOMAIN-SUFFIX,applovin.com,REJECT
+  - DOMAIN-SUFFIX,applvn.com,REJECT
+  - DOMAIN-SUFFIX,unityads.unity3d.com,REJECT
+  - DOMAIN-SUFFIX,pangle.io,REJECT
+  - DOMAIN-SUFFIX,snssdk.com,REJECT
+
+  # 3. EKSEKUSI RULE-SET ADS
+  - RULE-SET,Ads_Ultimate,REJECT
   - RULE-SET,Ads_Indo,REJECT
+  - RULE-SET,Ads_Global,REJECT
+  - RULE-SET,Ads_Mobile,REJECT
+
+  # 4. App Rules
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
+  - RULE-SET,Rule_MyXL,DIRECT
+
+  # 5. Global Geo & Match
+  - GEOIP,ID,VPN
   - MATCH,VPN
