@@ -1,4 +1,4 @@
-Port: 7890
+port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
@@ -19,13 +19,13 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
-  # DNS terenkripsi untuk mencegah hijacking iklan oleh ISP
   default-nameserver:
     - 8.8.8.8
     - 1.1.1.1
   nameserver:
     - https://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
+    - quic://dns.adguard-dns.com # Tambahan: Proteksi level DNS 2026
   fake-ip-filter:
     - 'connectivitycheck.gstatic.com'
     - 'connectivitycheck.android.com'
@@ -266,57 +266,55 @@ proxy-groups:
     timeout: 2000
 
 rule-providers:
-  # --- RULES ADS BLOCK ---
   Ads_Ultimate:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
     path: ./provider/ads_ultimate.yaml
     interval: 86400
-
   Ads_Indo:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/abpindo.yaml"
     path: ./provider/ads_indo.yaml
     interval: 86400
-
   Ads_Global:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml"
     path: ./provider/ads_global.yaml
     interval: 86400
-
   Ads_Mobile:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/alfatihart/clashBlock/main/adaway.yaml"
     path: ./provider/ads_mobile.yaml
     interval: 86400
+  Ads_Annoyance: # Tambahan: Memblokir pop-up/gangguan web
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/annoyance.txt"
+    path: ./provider/ads_annoyance.yaml
+    interval: 86400
 
-  # --- APP RULES ---
   Rule_TikTok:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/tiktok.yaml"
     interval: 86400
     path: "./provider/tiktok.yaml"
-
   Rule_WhatsApp:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/whatsapp.yaml"
     interval: 86400
     path: "./provider/whatsapp.yaml"
-
   Rule_YouTube:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
     interval: 86400
     path: "./provider/youtube.yaml"
-
   Rule_MyXL:
     type: http
     behavior: classical
@@ -325,15 +323,17 @@ rule-providers:
     path: "./provider/myxl.yaml"
 
 rules:
-  # 1. Bypass Lokal & LAN
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # 2. EKSEKUSI MANUAL ADS (Mencegah Iklan Umum & Tracking)
+  # --- BENTENG TINGKAT DEWA 2026 (Keyword & Specific) ---
   - DOMAIN-KEYWORD,adserver,REJECT
   - DOMAIN-KEYWORD,ad-delivery,REJECT
   - DOMAIN-KEYWORD,ads-system,REJECT
+  - DOMAIN-KEYWORD,analytics,REJECT
+  - DOMAIN-KEYWORD,telemetry,REJECT
+  - DOMAIN-KEYWORD,tracking,REJECT
   - DOMAIN-SUFFIX,doubleclick.net,REJECT
   - DOMAIN-SUFFIX,googleadservices.com,REJECT
   - DOMAIN-SUFFIX,googlesyndication.com,REJECT
@@ -346,19 +346,20 @@ rules:
   - DOMAIN-SUFFIX,unityads.unity3d.com,REJECT
   - DOMAIN-SUFFIX,pangle.io,REJECT
   - DOMAIN-SUFFIX,snssdk.com,REJECT
+  - DOMAIN-SUFFIX,tracking.miui.com,REJECT # Blokir iklan sistem HP
 
-  # 3. EKSEKUSI RULE-SET ADS
+  # --- EKSEKUSI RULE-SET ADS ---
   - RULE-SET,Ads_Ultimate,REJECT
   - RULE-SET,Ads_Indo,REJECT
   - RULE-SET,Ads_Global,REJECT
   - RULE-SET,Ads_Mobile,REJECT
+  - RULE-SET,Ads_Annoyance,REJECT
 
-  # 4. App Rules
+  # --- App Rules ---
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MyXL,DIRECT
 
-  # 5. Global Geo & Match
   - GEOIP,ID,VPN
   - MATCH,VPN
