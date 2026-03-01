@@ -256,32 +256,38 @@ proxy-providers:
       timeout: 2000
 
 proxy-groups:
+  # TAB UTAMA 1
   - name: VPN
     type: select
     use:
       - Akun-VPN
     proxies:
-      - "ADS-BLOCKER"
+      - ADS-BLOCKER
 
-  - name: "ADS-BLOCKER"
+  # TAB UTAMA 2
+  - name: ADS-BLOCKER
     type: select
     proxies:
-      - "AD-ON"
-      - "AD-OFF-VPN"
-      - "AD-OFF-DIRECT"
+      - AD-BLOCK-ON
+      - AD-BLOCK-OFF-VPN
+      - AD-BLOCK-OFF-DIRECT
 
-  - name: "AD-ON"
+  # GRUP TERSEMBUNYI (Hidden: true agar Action Bar tetap rapi)
+  - name: AD-BLOCK-ON
     type: select
+    hidden: true
     proxies:
       - REJECT
 
-  - name: "AD-OFF-VPN"
+  - name: AD-BLOCK-OFF-VPN
     type: select
+    hidden: true
     use:
       - Akun-VPN
 
-  - name: "AD-OFF-DIRECT"
+  - name: AD-BLOCK-OFF-DIRECT
     type: select
+    hidden: true
     proxies:
       - DIRECT
 
