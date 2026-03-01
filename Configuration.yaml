@@ -18,7 +18,7 @@ dns:
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  drop-old-fake-ip: true # Membersihkan cache IP lama agar iklan baru tidak lolos
+  drop-old-fake-ip: true
   listen: 0.0.0.0:7874
   fake-ip-filter:
     - 'connectivitycheck.gstatic.com'
@@ -232,18 +232,9 @@ dns:
     - 8.8.8.8
     - 1.1.1.1
   nameserver:
-    - https://dns.adguard-dns.com/dns-query # DNS Khusus blokir iklan
+    - https://dns.adguard-dns.com/dns-query
     - https://dns.google/dns-query
     - 1.1.1.1
-    - 8.8.8.8
-
-sniffer:
-  enable: true
-  sniff:
-    TLS:
-      ports: [443, 8443]
-    HTTP:
-      ports: [80, 8080-8880]
 
 proxy-providers:
   Akun-VPN:
@@ -262,13 +253,9 @@ proxy-groups:
     type: select
     use:
       - Akun-VPN
-    url: http://cp.cloudflare.com/generate_204
-    interval: 150
-    tolerance: 100
-    timeout: 2000
 
 rule-providers:
-  # --- RULES ADS BLOCK (Link diperbaiki agar tidak Payload Error) ---
+  # FIX: Menggunakan behavior: classical untuk link AWAvenue terbaru agar terbaca payload-nya
   Ads_AWAvenue:
     type: http
     behavior: classical
@@ -290,60 +277,35 @@ rule-providers:
     path: ./provider/ads_indo.yaml
     interval: 86400
 
-  Ads_Global:
-    type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml"
-    path: ./provider/ads_global.yaml
-    interval: 86400
-
-  # --- APP RULES ---
   Rule_TikTok:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/tiktok.yaml"
-    interval: 86400
     path: "./provider/tiktok.yaml"
+    interval: 86400
 
   Rule_WhatsApp:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/whatsapp.yaml"
-    interval: 86400
     path: "./provider/whatsapp.yaml"
+    interval: 86400
 
   Rule_YouTube:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
-    interval: 86400
     path: "./provider/youtube.yaml"
-
-  Rule_MyXL:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/myxl.yaml"
     interval: 86400
-    path: "./provider/myxl.yaml"
 
 rules:
-  # 1. Bypass Lokal & LAN (Wajib Nomor 1)
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
-
-  # 2. EKSEKUSI ADS BLOCK (Wajib di atas App Rules)
   - RULE-SET,Ads_AWAvenue,REJECT
   - RULE-SET,Reject_List,REJECT
   - RULE-SET,Ads_Indo,REJECT
-  - RULE-SET,Ads_Global,REJECT
-
-  # 3. App Rules
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
-  - RULE-SET,Rule_MyXL,DIRECT
-
-  # 4. Final Match
-  - GEOIP,ID,VPN
   - MATCH,VPN
