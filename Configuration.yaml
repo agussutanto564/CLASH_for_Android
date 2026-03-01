@@ -256,36 +256,24 @@ proxy-providers:
       timeout: 2000
 
 proxy-groups:
-  # TAB UTAMA 1
+  # TAB 1: Menu VPN & Tombol Matikan Adblock
   - name: VPN
     type: select
     use:
       - Akun-VPN
     proxies:
-      - ADS-BLOCKER
+      - ADS-OFF
 
-  # TAB UTAMA 2
+  # TAB 2: Sakelar Pusat Adblock
   - name: ADS-BLOCKER
     type: select
     proxies:
-      - AD-BLOCK-ON
-      - AD-BLOCK-OFF-VPN
-      - AD-BLOCK-OFF-DIRECT
-
-  # GRUP TERSEMBUNYI (Hidden: true agar Action Bar tetap rapi)
-  - name: AD-BLOCK-ON
-    type: select
-    hidden: true
-    proxies:
       - REJECT
+      - VPN
+      - DIRECT
 
-  - name: AD-BLOCK-OFF-VPN
-    type: select
-    hidden: true
-    use:
-      - Akun-VPN
-
-  - name: AD-BLOCK-OFF-DIRECT
+  # Grup ini disembunyikan agar Action Bar bersih
+  - name: ADS-OFF
     type: select
     hidden: true
     proxies:
@@ -352,27 +340,13 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  - DOMAIN-KEYWORD,adserver,ADS-BLOCKER
-  - DOMAIN-KEYWORD,ad-delivery,ADS-BLOCKER
-  - DOMAIN-KEYWORD,ads-system,ADS-BLOCKER
-  - DOMAIN-SUFFIX,doubleclick.net,ADS-BLOCKER
-  - DOMAIN-SUFFIX,googleadservices.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,googlesyndication.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,app-measurement.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,analytics.google.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,ads.youtube.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,crashlytics.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,applovin.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,applvn.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,unityads.unity3d.com,ADS-BLOCKER
-  - DOMAIN-SUFFIX,pangle.io,ADS-BLOCKER
-  - DOMAIN-SUFFIX,snssdk.com,ADS-BLOCKER
-
+  # Rule Iklan (Otomatis REJECT jika pilih server VPN)
   - RULE-SET,Ads_Ultimate,ADS-BLOCKER
   - RULE-SET,Ads_Indo,ADS-BLOCKER
   - RULE-SET,Ads_Global,ADS-BLOCKER
   - RULE-SET,Ads_Mobile,ADS-BLOCKER
 
+  # Rule App
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
