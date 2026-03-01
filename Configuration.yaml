@@ -324,6 +324,13 @@ rule-providers:
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/myxl.yaml"
     interval: 86400
     path: "./provider/myxl.yaml"
+    
+  Rule_MLBB:  
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/mlbb.yaml"
+    interval: 86400
+    path: "./provider/mlbb.yaml"
 
 rules:
   # 1. Bypass Lokal & LAN
@@ -359,7 +366,9 @@ rules:
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MyXL,DIRECT
-
+  - RULE-SET,Rule_MyXL,DIRECT
+  - RULE-SET,Rule_MLBB,VPN
+  
   # 5. Global Geo & Match
   - GEOIP,ID,VPN
   - MATCH,VPN
