@@ -22,26 +22,17 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
-  default-nameserver:
-    - 8.8.8.8
-    - 1.1.1.1
+  default-nameserver: [8.8.8.8, 1.1.1.1]
   nameserver:
     - https://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
   fake-ip-filter:
-    # [Sistem & Google]
     - '+.gstatic.com'
     - '+.google.com'
     - '+.android.com'
-    
-    # [Server VMess & Tunneling]
     - '+.kegiatankerja.my.id'
-    
-    # [WhatsApp]
     - '+.whatsapp.net'
     - '+.whatsapp.com'
-    
-    # [TikTok]
     - '+.tiktok.com'
     - '+.tiktokv.com'
     - '+.tiktokcdn.com'
@@ -54,10 +45,8 @@ dns:
 sniffer:
   enable: true
   sniff:
-    TLS:
-      ports: [443, 8443]
-    HTTP:
-      ports: [80, 8080-8880]
+    TLS: {ports: [443, 8443]}
+    HTTP: {ports: [80, 8080-8880]}
 
 # --- PROXY PROVIDER ---
 proxy-providers:
@@ -74,15 +63,21 @@ proxy-providers:
 
 # --- PROXY GROUPS ---
 proxy-groups:
-  # Grup Utama (Tampilan Bersih 1 Tab)
+  # 1. GRUP UTAMA (Ini yang akan muncul paling atas di CFA)
   - name: VPN
     type: select
+    proxies:
+      - ADS-ON   # Default: Iklan Diblokir
+      - ADS-OFF  # Opsi: Iklan Muncul (Bypass)
+
+  # 2. SUB-GRUP (Di CFA ini akan muncul di bawahnya)
+  # Gunakan 'hidden: true' tetap ditulis untuk persiapan jika Anda migrasi ke Meta
+  - name: ADS-ON
+    type: select
+    hidden: true
     use:
       - Akun-VPN
-    proxies:
-      - ADS-OFF
 
-  # Grup Tersembunyi (Bypass Iklan)
   - name: ADS-OFF
     type: select
     hidden: true
@@ -146,13 +141,14 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # Adblocking Logic
+  # Logika Adblocking (Hanya aktif jika di grup VPN memilih 'ADS-ON')
+  # Rule REJECT ini akan memotong koneksi iklan sebelum sampai ke proxy
   - RULE-SET,Ads_Ultimate,REJECT
   - RULE-SET,Ads_Indo,REJECT
   - RULE-SET,Ads_Global,REJECT
   - RULE-SET,Ads_Mobile,REJECT
 
-  # App Routing
+  # Routing Aplikasi
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
