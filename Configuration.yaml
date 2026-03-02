@@ -1,4 +1,4 @@
-# --- CONFIGURATION CLASH (FINAL OPTIMIZED) ---
+# --- CONFIGURATION CLASH (FIXED ERROR) ---
 port: 7890
 socks-port: 7891
 redir-port: 7892
@@ -9,11 +9,11 @@ udp: true
 mode: rule
 log-level: silent
 allow-lan: true
-unified-delay: true  # Diaktifkan kembali agar tampilan ping stabil
-tcp-fast-open: false # Dimatikan agar tidak bengong di kuota Edukasi
+unified-delay: true
+tcp-fast-open: false
 tcp-concurrent: true
 external-controller: 127.0.0.1:9090
-keep-alive-interval: 5 # Menjaga koneksi tetap 'panas' agar tidak RTO
+keep-alive-interval: 5
 
 # --- DNS SETTINGS ---
 dns:
@@ -63,21 +63,21 @@ proxy-providers:
 
 # --- PROXY GROUPS ---
 proxy-groups:
-  # 1. GRUP UTAMA (Satu-satunya tab yang akan muncul di atas)
+  # 1. GRUP UTAMA (Hanya ini yang muncul di bar atas)
   - name: VPN
     type: select
     proxies:
       - ADS-ON
       - ADS-OFF
 
-  # 2. SUB-GRUP (Menggunakan tipe relay agar sembunyi dari tab atas)
+  # 2. SUB-GRUP (Menggunakan tipe 'pass' agar tersembunyi total)
   - name: ADS-ON
-    type: relay
+    type: pass
     use:
       - Akun-VPN
 
   - name: ADS-OFF
-    type: relay
+    type: pass
     use:
       - Akun-VPN
 
@@ -138,7 +138,7 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # --- LOGIKA AD-BLOCK ON/OFF ---
+  # Logika Ad-Block
   - RULE-SET,Ads_Ultimate,VPN,proxy-select=ADS-ON,REJECT
   - RULE-SET,Ads_Indo,VPN,proxy-select=ADS-ON,REJECT
   - RULE-SET,Ads_Global,VPN,proxy-select=ADS-ON,REJECT
