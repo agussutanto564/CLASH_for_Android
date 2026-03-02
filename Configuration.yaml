@@ -1,19 +1,19 @@
-# --- CONFIGURATION CLASH ---
+# --- CONFIGURATION CLASH (STREAMING OPTIMIZED) ---
 port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
 ipv6: false
-udp: true
+udp: true                   # Penting untuk protokol QUIC TikTok
 mode: rule
 log-level: silent
 allow-lan: true
-unified-delay: true
-tcp-fast-open: false
+unified-delay: false        # Dimatikan agar respon streaming lebih instan
+tcp-fast-open: false        # Dimatikan untuk menghindari paket stuck/timeout
 tcp-concurrent: true
 external-controller: 127.0.0.1:9090
-keep-alive-interval: 5
+keep-alive-interval: 10
 
 # --- DNS SETTINGS ---
 dns:
@@ -40,6 +40,8 @@ dns:
     - '+.ibytedtos.com'
     - '+.myqcloud.com'
     - '+.snssdk.com'
+    - '+.pstatp.com'      # TikTok Static
+    - '+.ibyteimg.com'    # Gambar/Thumbnail TikTok
 
 # --- SNIFFER ---
 sniffer:
@@ -58,25 +60,26 @@ proxy-providers:
     health-check:
       enable: true
       url: http://cp.cloudflare.com/generate_204
-      interval: 150
+      interval: 300
       timeout: 2000
 
 # --- PROXY GROUPS ---
 proxy-groups:
-  # 1. GRUP UTAMA (Muncul di UI)
+  # GRUP UTAMA
   - name: VPN
     type: select
     proxies:
       - ADS-ON
       - ADS-OFF
 
-  # 2. SUB-GRUP (Disembunyikan dengan hidden: true agar tidak error)
+  # Mode Adblock Aktif
   - name: ADS-ON
     type: select
     hidden: true
     use:
       - Akun-VPN
 
+  # Mode Adblock Mati
   - name: ADS-OFF
     type: select
     hidden: true
@@ -140,15 +143,18 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # Logika Ad-Block
+  # 1. PRIORITAS TIKTOK (Ditempatkan paling atas agar tidak terbebani filter adblock)
+  - DOMAIN-KEYWORD,tiktok,VPN
+  - RULE-SET,Rule_TikTok,VPN
+
+  # 2. LOGIKA ADBLOCK (Hanya aktif jika pilih ADS-ON)
   - RULE-SET,Ads_Ultimate,VPN,proxy-select=ADS-ON,REJECT
   - RULE-SET,Ads_Indo,VPN,proxy-select=ADS-ON,REJECT
   - RULE-SET,Ads_Global,VPN,proxy-select=ADS-ON,REJECT
   - RULE-SET,Ads_Mobile,VPN,proxy-select=ADS-ON,REJECT
 
-  # Routing Aplikasi
+  # 3. ROUTING APLIKASI LAIN
   - RULE-SET,Rule_WhatsApp,VPN
-  - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MLBB,VPN
   
