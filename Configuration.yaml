@@ -130,13 +130,19 @@ rule-providers:
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
     interval: 86400
     path: "./youtube.yaml"
+  Rule_GoTube:  
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/gotube.yaml"
+    interval: 86400
+    path: "./gotube.yaml"
   Rule_MLBB:  
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/mlbb.yaml"
     interval: 86400
     path: "./mlbb.yaml"
-
+    
 # --- RULES ---
 rules:
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
@@ -156,6 +162,7 @@ rules:
   # 3. ROUTING APLIKASI LAIN
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_YouTube,VPN
+  - RULE-SET,Rule_GoTube,VPN
   - RULE-SET,Rule_MLBB,VPN
   
   # Global Catch
