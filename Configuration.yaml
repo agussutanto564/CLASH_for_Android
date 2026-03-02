@@ -160,4 +160,4 @@ rules:
   
   # Global Catch
   - GEOIP,ID,VPN
-  - MATCH,VPN
+  - MATCH,DIRECT
