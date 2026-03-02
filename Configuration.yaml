@@ -1,3 +1,4 @@
+# --- CONFIGURATION CLASH ---
 port: 7890
 socks-port: 7891
 redir-port: 7892
@@ -14,6 +15,7 @@ tcp-concurrent: true
 external-controller: 127.0.0.1:9090
 keep-alive-interval: 10
 
+# --- DNS SETTINGS ---
 dns:
   enable: true
   ipv6: false
@@ -27,42 +29,28 @@ dns:
     - https://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
   fake-ip-filter:
-    - 'connectivitycheck.gstatic.com'
-    - 'connectivitycheck.android.com'
-    - 'msftconnecttest.com'
-    - 'msftncsi.com'
-    - 'clients3.google.com'
-    - '*.whatsapp.net'
-    - '*.whatsapp.com'
-    - '*.google.com'
-    - '*.kemdikbud.go.id'
-    - 'domain:*.xl.co.id'
-    - 'domain:*.xlaxiata.id'
-    - 'domain:*.myxl.co.id'
-    - 'domain:*.axisnet.id'
-    - 'domain:+.xl.co.id'
-    - 'domain:+.xlaxiata.id'
-    - 'domain:myxl.co.id'
-    - 'domain:axisnet.id'
-    - 'domain:support.udemy.com'
-    - 'domain:+.udemy.com'
-    - 'domain:+.ruangguru.com'
-    - 'domain:id-atha001.kegiatankerja.my.id'
-    - 'domain:+.kegiatankerja.my.id'
-  #tiktok
-    - '*.tiktokv.com'
-    - '*.byteoversea.com'
-    - '*.tik-tokapi.com'
-    - '*.ibytedtos.com'
-    - '*.myqcloud.com'
-    - '*.tiktokcdn.com'
-    - '*.tiktok.com'
-    - '*.ttcdn-tos.com'
-    - '*.pstatp.com'
-    - '*.snssdk.com'
-    - '*.isnssdk.com'
-    - '*.byteocdn.com'
+    # [Sistem & Google]
+    - '+.gstatic.com'
+    - '+.google.com'
+    - '+.android.com'
+    
+    # [Server VMess & Tunneling]
+    - '+.kegiatankerja.my.id'
+    
+    # [WhatsApp]
+    - '+.whatsapp.net'
+    - '+.whatsapp.com'
+    
+    # [TikTok]
+    - '+.tiktok.com'
+    - '+.tiktokv.com'
+    - '+.tiktokcdn.com'
+    - '+.byteoversea.com'
+    - '+.ibytedtos.com'
+    - '+.myqcloud.com'
+    - '+.snssdk.com'
 
+# --- SNIFFER ---
 sniffer:
   enable: true
   sniff:
@@ -71,6 +59,7 @@ sniffer:
     HTTP:
       ports: [80, 8080-8880]
 
+# --- PROXY PROVIDER ---
 proxy-providers:
   Akun-VPN:
     type: http
@@ -83,8 +72,9 @@ proxy-providers:
       interval: 150
       timeout: 2000
 
+# --- PROXY GROUPS ---
 proxy-groups:
-  # SATU-SATUNYA TAB DI LAYAR UTAMA
+  # Grup Utama (Tampilan Bersih 1 Tab)
   - name: VPN
     type: select
     use:
@@ -92,13 +82,14 @@ proxy-groups:
     proxies:
       - ADS-OFF
 
-  # Grup ini disembunyikan agar tab kedua tidak muncul di atas
+  # Grup Tersembunyi (Bypass Iklan)
   - name: ADS-OFF
     type: select
     hidden: true
     use:
       - Akun-VPN
 
+# --- RULE PROVIDER ---
 rule-providers:
   Ads_Ultimate:
     type: http
@@ -149,24 +140,24 @@ rule-providers:
     interval: 86400
     path: "./provider/mlbb.yaml"
 
+# --- RULES ---
 rules:
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # LOGIKA 1 TAB:
-  # Pilih Server -> Iklan REJECT (Mati)
-  # Pilih ADS-OFF -> Iklan ikut jalur VPN (Tetap gratis & Iklan muncul)
+  # Adblocking Logic
   - RULE-SET,Ads_Ultimate,REJECT
   - RULE-SET,Ads_Indo,REJECT
   - RULE-SET,Ads_Global,REJECT
   - RULE-SET,Ads_Mobile,REJECT
 
-  # Aplikasi
+  # App Routing
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_TikTok,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_MLBB,VPN
   
+  # Global Catch
   - GEOIP,ID,VPN
   - MATCH,VPN
