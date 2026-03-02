@@ -63,21 +63,23 @@ proxy-providers:
 
 # --- PROXY GROUPS ---
 proxy-groups:
-  # 1. GRUP UTAMA (Hanya ini yang muncul di bar atas)
+  # 1. GRUP UTAMA (Muncul di UI)
   - name: VPN
     type: select
     proxies:
       - ADS-ON
       - ADS-OFF
 
-  # 2. SUB-GRUP (Menggunakan tipe 'pass' agar tersembunyi total)
+  # 2. SUB-GRUP (Disembunyikan dengan hidden: true agar tidak error)
   - name: ADS-ON
-    type: pass
+    type: select
+    hidden: true
     use:
       - Akun-VPN
 
   - name: ADS-OFF
-    type: pass
+    type: select
+    hidden: true
     use:
       - Akun-VPN
 
