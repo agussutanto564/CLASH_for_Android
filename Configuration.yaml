@@ -1,4 +1,4 @@
-# --- CONFIGURATION CLASH ---
+# --- CONFIGURATION CLASH (OPTIMIZED FOR LIVE STREAMING) ---
 port: 7890
 socks-port: 7891
 redir-port: 7892
@@ -9,11 +9,11 @@ udp: true
 mode: rule
 log-level: silent
 allow-lan: true
-unified-delay: true
-tcp-fast-open: true
+unified-delay: false
+tcp-fast-open: false
 tcp-concurrent: true
 external-controller: 127.0.0.1:9090
-keep-alive-interval: 10
+keep-alive-interval: 5
 
 # --- DNS SETTINGS ---
 dns:
@@ -53,8 +53,8 @@ proxy-providers:
   Akun-VPN:
     type: http
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/vpn.yaml"
-    interval: 86400
-    path: "./provider/vpn.yaml"
+    interval: 3600
+    path: "./vpn.yaml"
     health-check:
       enable: true
       url: http://cp.cloudflare.com/generate_204
@@ -63,15 +63,14 @@ proxy-providers:
 
 # --- PROXY GROUPS ---
 proxy-groups:
-  # 1. GRUP UTAMA (Ini yang akan muncul paling atas di CFA)
+  # 1. GRUP UTAMA (Hanya menampilkan opsi Ads)
   - name: VPN
     type: select
     proxies:
-      - ADS-ON   # Default: Iklan Diblokir
-      - ADS-OFF  # Opsi: Iklan Muncul (Bypass)
+      - ADS-ON
+      - ADS-OFF
 
-  # 2. SUB-GRUP (Di CFA ini akan muncul di bawahnya)
-  # Gunakan 'hidden: true' tetap ditulis untuk persiapan jika Anda migrasi ke Meta
+  # 2. SUB-GRUP (Daftar server tersembunyi agar rapi)
   - name: ADS-ON
     type: select
     hidden: true
@@ -90,50 +89,50 @@ rule-providers:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
-    path: ./provider/ads_ultimate.yaml
+    path: ./ads_ultimate.yaml
     interval: 86400
   Ads_Indo:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/abpindo.yaml"
-    path: ./provider/ads_indo.yaml
+    path: ./ads_indo.yaml
     interval: 86400
   Ads_Global:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml"
-    path: ./provider/ads_global.yaml
+    path: ./ads_global.yaml
     interval: 86400
   Ads_Mobile:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/alfatihart/clashBlock/main/adaway.yaml"
-    path: ./provider/ads_mobile.yaml
+    path: ./ads_mobile.yaml
     interval: 86400
   Rule_TikTok:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/tiktok.yaml"
     interval: 86400
-    path: "./provider/tiktok.yaml"
+    path: "./tiktok.yaml"
   Rule_WhatsApp:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/whatsapp.yaml"
     interval: 86400
-    path: "./provider/whatsapp.yaml"
+    path: "./whatsapp.yaml"
   Rule_YouTube:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/youtube.yaml"
     interval: 86400
-    path: "./provider/youtube.yaml"
+    path: "./youtube.yaml"
   Rule_MLBB:  
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/agussutanto564/CLASH_for_Android/main/provider/mlbb.yaml"
     interval: 86400
-    path: "./provider/mlbb.yaml"
+    path: "./mlbb.yaml"
 
 # --- RULES ---
 rules:
@@ -141,12 +140,13 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # Logika Adblocking (Hanya aktif jika di grup VPN memilih 'ADS-ON')
-  # Rule REJECT ini akan memotong koneksi iklan sebelum sampai ke proxy
-  - RULE-SET,Ads_Ultimate,REJECT
-  - RULE-SET,Ads_Indo,REJECT
-  - RULE-SET,Ads_Global,REJECT
-  - RULE-SET,Ads_Mobile,REJECT
+  # --- LOGIKA AD-BLOCK ON/OFF ---
+  # Jika pilih ADS-ON, rule-set iklan akan masuk ke REJECT (Blokir).
+  # Jika pilih ADS-OFF, rule-set iklan akan masuk ke VPN (Iklan Muncul).
+  - RULE-SET,Ads_Ultimate,VPN,proxy-select=ADS-ON,REJECT
+  - RULE-SET,Ads_Indo,VPN,proxy-select=ADS-ON,REJECT
+  - RULE-SET,Ads_Global,VPN,proxy-select=ADS-ON,REJECT
+  - RULE-SET,Ads_Mobile,VPN,proxy-select=ADS-ON,REJECT
 
   # Routing Aplikasi
   - RULE-SET,Rule_WhatsApp,VPN
