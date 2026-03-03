@@ -1,29 +1,50 @@
 payload:
-  # WHATSAPP
-  - DOMAIN-SUFFIX,fna.whatsapp.net
-  - DOMAIN-SUFFIX,wa.me
-  - DOMAIN-SUFFIX,whatsapp-plus.info
-  - DOMAIN-SUFFIX,whatsapp-plus.me
-  - DOMAIN-SUFFIX,whatsapp-plus.net
-  - DOMAIN-SUFFIX,whatsapp.cc
-  - DOMAIN-SUFFIX,whatsapp.com
-  - DOMAIN-SUFFIX,whatsapp.info
+  # --- [1] PROCESS NAMES (Anti-Delay Notifikasi) ---
+  - PROCESS-NAME,com.whatsapp
+  - PROCESS-NAME,com.whatsapp.w4b
+
+  # --- [2] DOMAIN KEYWORD (Jalur Utama Chat & Status) ---
+  - DOMAIN-KEYWORD,whatsapp
+  - DOMAIN-KEYWORD,ws.whatsapp
+  - DOMAIN-KEYWORD,web.whatsapp
+  - DOMAIN-KEYWORD,media-cgk
+  - DOMAIN-KEYWORD,media-sin
+  - DOMAIN-KEYWORD,pps.whatsapp
+  - DOMAIN-KEYWORD,wa.me
+
+  # --- [3] DOMAIN SUFFIX (Aset Media, Sticker & Backup) ---
   - DOMAIN-SUFFIX,whatsapp.net
-  - DOMAIN-SUFFIX,whatsapp.org
+  - DOMAIN-SUFFIX,whatsapp.com
   - DOMAIN-SUFFIX,whatsapp.tv
-  - DOMAIN-SUFFIX,whatsappbrand.com
-  - DST-PORT,3478
-  - DST-PORT,4244
-  - DST-PORT,5222
-  - DST-PORT,5223
-  - DST-PORT,5228
-  - DST-PORT,5288
-  - DST-PORT,5242
-  - DST-PORT,5349
-  - DST-PORT,34784
-  - DST-PORT,45395
-  - DST-PORT,50318
-  - DST-PORT,59234
-  - DST-PORT,12222
-  - DST-PORT,11112
-  - DST-PORT,25566
+  - DOMAIN-SUFFIX,fbcdn.net
+  - DOMAIN-SUFFIX,facebook.com
+  - DOMAIN-SUFFIX,m.facebook.com
+  - DOMAIN-SUFFIX,cdn.whatsapp.net
+  - DOMAIN-SUFFIX,static.whatsapp.net
+  - DOMAIN-SUFFIX,g.whatsapp.net
+  - DOMAIN-SUFFIX,mmg.whatsapp.net
+
+  # --- [4] VOIP & CALL OPTIMIZATION (Jalur Telepon Jernih) ---
+  # Domain khusus penanganan suara agar tidak robot/reconnecting
+  - DOMAIN-SUFFIX,v.whatsapp.net
+  - DOMAIN-SUFFIX,turn.whatsapp.net
+  - DOMAIN-SUFFIX,stun.whatsapp.net
+  - DOMAIN-SUFFIX,ms.whatsapp.net
+
+  # --- [5] IP-CIDR (Jalur Emas Server WhatsApp/Meta) ---
+  # Range IP ini wajib masuk PROXY agar Call tidak terputus saat tanpa kuota
+  - IP-CIDR,18.194.0.0/15,no-resolve
+  - IP-CIDR,31.13.24.0/21,no-resolve
+  - IP-CIDR,31.13.64.0/18,no-resolve
+  - IP-CIDR,45.64.40.0/22,no-resolve
+  - IP-CIDR,66.220.144.0/20,no-resolve
+  - IP-CIDR,69.63.176.0/20,no-resolve
+  - IP-CIDR,69.171.224.0/19,no-resolve
+  - IP-CIDR,74.123.0.0/16,no-resolve
+  - IP-CIDR,103.4.96.0/22,no-resolve
+  - IP-CIDR,129.134.0.0/17,no-resolve
+  - IP-CIDR,157.240.0.0/17,no-resolve
+  - IP-CIDR,173.252.64.0/18,no-resolve
+  - IP-CIDR,179.60.192.0/22,no-resolve
+  - IP-CIDR,185.60.216.0/22,no-resolve
+  - IP-CIDR,204.15.20.0/22,no-resolve
