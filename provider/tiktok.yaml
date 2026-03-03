@@ -1,35 +1,11 @@
-payload:
-  # --- [1] PROCESS NAMES (Full Shield) ---
-  - PROCESS-NAME,com.zhiliaoapp.musically
+Payload:
+  # --- [1] PROCESS NAMES (TikTok Indo/Global Only) ---
   - PROCESS-NAME,com.ss.android.ugc.trill
   - PROCESS-NAME,com.ss.android.ugc.tiktok.liveproxy
-  - PROCESS-NAME,com.ss.android.ugc.aweme
-  - PROCESS-NAME,com.ss.android.ugc.aweme.lite
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.pns
   - PROCESS-NAME,com.ss.android.ugc.trill.go
   - PROCESS-NAME,com.ss.android.ugc.tiktok.video
-  - PROCESS-NAME,com.bytedance.sdk.account
-  - PROCESS-NAME,com.beautymst.tiktok
-  - PROCESS-NAME,com.tokopedia.tkpd
-  - PROCESS-NAME,com.gojek.app
-  - PROCESS-NAME,com.tokopedia.sellerapp
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.shop
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.seller
   - PROCESS-NAME,com.ss.android.ugc.tiktok.shoppay
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.uikit
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.music
-  - PROCESS-NAME,com.ss.android.ugc.gametools.tiktok
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.widgets
-  - PROCESS-NAME,com.ss.android.ugc.livecenter
-  - PROCESS-NAME,com.lemon.lvoverseas
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.i18n
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.creative
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.applog
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.plugin
   - PROCESS-NAME,com.ss.android.ugc.trill.share
-  - PROCESS-NAME,com.bytedance.applog
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.df
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.music.widget
 
   # --- [2] TIKTOK & BYTEDANCE DOMAINS (Extended & Shadow Infra) ---
   - DOMAIN,p16-tiktokcdn-com.akamaized.net
