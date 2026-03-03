@@ -1,29 +1,36 @@
 payload:
-  # [Sistem Android - Bypass by App Name]
+  # --- [1] PROCESS NAMES (Prioritas Utama) ---
+  # Menangkap semua aktivitas app agar tidak bocor ke Direct
   - PROCESS-NAME,com.apps.MyXL
   - PROCESS-NAME,com.axis.net
 
-  # [Domain Utama XL & Axis]
+  # --- [2] DOMAIN SUFFIX (Prioritas Suffix untuk Akses Cepat) ---
+  # Jalur utama API dan Login
   - DOMAIN-SUFFIX,xl.co.id
   - DOMAIN-SUFFIX,xlaxiata.id
   - DOMAIN-SUFFIX,myxl.co.id
+  - DOMAIN-SUFFIX,axis.co.id
   - DOMAIN-SUFFIX,axisnet.id
+  - DOMAIN-SUFFIX,xl.id
+  - DOMAIN-SUFFIX,axis.id
+  
+  # Jalur Asset Gambar & Promo (Agar tidak blank)
+  - DOMAIN-SUFFIX,cloudfront.net
+  - DOMAIN-SUFFIX,akamaihd.net
+  - DOMAIN-SUFFIX,app-measurement.com
+  - DOMAIN-SUFFIX,firebaseio.com
+  - DOMAIN-SUFFIX,crashlytics.com
+
+  # --- [3] DOMAIN KEYWORD (Sapu Jagat) ---
   - DOMAIN-KEYWORD,myxl
   - DOMAIN-KEYWORD,xlaxiata
   - DOMAIN-KEYWORD,axisnet
+  - DOMAIN-KEYWORD,xl-api
+  - DOMAIN-KEYWORD,axis-api
 
-  # [Infrastruktur API & Backend]
-  - DOMAIN-SUFFIX,api.xl.co.id
-  - DOMAIN-SUFFIX,auth.xl.co.id
-  - DOMAIN-SUFFIX,api-myxl.xl.co.id
-  - DOMAIN-SUFFIX,prod-myxl.xlaxiata.id
-  
-  # [Analytics & Tracking]
-  - DOMAIN-KEYWORD,crashlytics
-  - DOMAIN-KEYWORD,firebaseio
-  - DOMAIN-SUFFIX,app-measurement.com
-
-  # [IP Range Server XL]
-  - IP-CIDR,112.215.0.0/16
-  - IP-CIDR,202.152.240.0/20
-  - IP-CIDR,101.255.0.0/16
+  # --- [4] IP-CIDR (Jalur Server XL Axiata) ---
+  # Menghindari timeout saat verifikasi sinyal
+  - IP-CIDR,112.215.0.0/16,no-resolve
+  - IP-CIDR,202.152.240.0/20,no-resolve
+  - IP-CIDR,101.255.0.0/16,no-resolve
+  - IP-CIDR,180.240.0.0/14,no-resolve
