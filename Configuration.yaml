@@ -9,8 +9,8 @@ udp: true                   # Penting untuk protokol QUIC TikTok
 mode: rule
 log-level: silent
 allow-lan: true
-unified-delay: false        # Dimatikan agar respon streaming lebih instan
-tcp-fast-open: false        # Dimatikan untuk menghindari paket stuck/timeout
+unified-delay: false        
+tcp-fast-open: false        
 tcp-concurrent: true
 external-controller: 127.0.0.1:9090
 keep-alive-interval: 10
@@ -40,8 +40,8 @@ dns:
     - '+.ibytedtos.com'
     - '+.myqcloud.com'
     - '+.snssdk.com'
-    - '+.pstatp.com'      # TikTok Static
-    - '+.ibyteimg.com'    # Gambar/Thumbnail TikTok
+    - '+.pstatp.com'
+    - '+.ibyteimg.com'
 
 # --- SNIFFER ---
 sniffer:
@@ -65,24 +65,20 @@ proxy-providers:
 
 # --- PROXY GROUPS ---
 proxy-groups:
-  # GRUP UTAMA
+  # GRUP UTAMA (ADS-ON di urutan pertama agar otomatis AKTIF)
   - name: VPN
     type: select
     proxies:
       - ADS-ON
       - ADS-OFF
 
-  # Mode Adblock Aktif
   - name: ADS-ON
     type: select
-    hidden: true
     use:
       - Akun-VPN
 
-  # Mode Adblock Mati
   - name: ADS-OFF
     type: select
-    hidden: true
     use:
       - Akun-VPN
 
@@ -149,22 +145,20 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - GEOIP,LAN,DIRECT
 
-  # 1. PRIORITAS TIKTOK (Ditempatkan paling atas agar tidak terbebani filter adblock)
+  # 1. PRIORITAS SOSMED & GAME (Melalui grup VPN pilihan user)
   - DOMAIN-KEYWORD,tiktok,VPN
   - RULE-SET,Rule_TikTok,VPN
-
-  # 2. LOGIKA ADBLOCK (Hanya aktif jika pilih ADS-ON)
-  - RULE-SET,Ads_Ultimate,VPN,proxy-select=ADS-ON,REJECT
-  - RULE-SET,Ads_Indo,VPN,proxy-select=ADS-ON,REJECT
-  - RULE-SET,Ads_Global,VPN,proxy-select=ADS-ON,REJECT
-  - RULE-SET,Ads_Mobile,VPN,proxy-select=ADS-ON,REJECT
-
-  # 3. ROUTING APLIKASI LAIN
   - RULE-SET,Rule_WhatsApp,VPN
   - RULE-SET,Rule_YouTube,VPN
   - RULE-SET,Rule_GoTube,VPN
   - RULE-SET,Rule_MLBB,VPN
-  
-  # Global Catch
+
+  # 2. LOGIKA ADBLOCK (Hanya merejek jika ADS-ON yang terpilih di grup VPN)
+  - RULE-SET,Ads_Ultimate,REJECT,proxy-select=ADS-ON
+  - RULE-SET,Ads_Indo,REJECT,proxy-select=ADS-ON
+  - RULE-SET,Ads_Global,REJECT,proxy-select=ADS-ON
+  - RULE-SET,Ads_Mobile,REJECT,proxy-select=ADS-ON
+
+  # 3. GLOBAL CATCH
   - GEOIP,ID,VPN
-  - MATCH,DIRECT
+  - MATCH,VPN
