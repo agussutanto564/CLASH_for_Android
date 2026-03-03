@@ -19,8 +19,17 @@ payload:
   - DOMAIN-KEYWORD,bytefcdn
   - DOMAIN-KEYWORD,pili
   - DOMAIN-KEYWORD,bytepulse
+  # Patch Treasure & Rewards
+  - DOMAIN-KEYWORD,treasure
+  - DOMAIN-KEYWORD,reward
+  - DOMAIN-KEYWORD,activity
+  - DOMAIN-KEYWORD,activity-va
 
   # --- [3] DOMAIN SUFFIX (Aset Gambar, Gift, Stiker & Komentar) ---
+  # Patch Aset Visual & Goodie Bag
+  - DOMAIN-SUFFIX,tiktokcdn.com
+  - DOMAIN-SUFFIX,tiktokv.com
+  - DOMAIN-SUFFIX,ttwstatic.com
   - DOMAIN-SUFFIX,pstatp.com
   - DOMAIN-SUFFIX,byteactivity.com
   - DOMAIN-SUFFIX,muscdn.com
@@ -31,6 +40,7 @@ payload:
   - DOMAIN-SUFFIX,ttlivecdn.com
   - DOMAIN-SUFFIX,byteoversea.com
   - DOMAIN-SUFFIX,ibyteimg.com
+  - DOMAIN-SUFFIX,bytedance.net
   - DOMAIN-SUFFIX,capcut.com
   - DOMAIN-SUFFIX,akamaized.net
   - DOMAIN-SUFFIX,worldfcdn.com
