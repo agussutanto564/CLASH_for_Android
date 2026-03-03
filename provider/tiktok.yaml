@@ -1,168 +1,64 @@
-Payload:
-  # --- [1] PROCESS NAMES ---
+payload:
+  # --- [1] PROCESS NAMES (Prioritas Utama App Android) ---
   - PROCESS-NAME,com.ss.android.ugc.trill
   - PROCESS-NAME,com.ss.android.ugc.tiktok.liveproxy
   - PROCESS-NAME,com.ss.android.ugc.trill.go
   - PROCESS-NAME,com.ss.android.ugc.tiktok.video
-  - PROCESS-NAME,com.ss.android.ugc.tiktok.shoppay
-  - PROCESS-NAME,com.ss.android.ugc.trill.share
 
-  # --- [2] DOMAIN (Exact Match) ---
-  - DOMAIN,p16-tiktokcdn-com.akamaized.net
-
-  # --- [3] DOMAIN SUFFIX (Cleaned & Optimized) ---
-  - DOMAIN-SUFFIX,tiktok.com
-  - DOMAIN-SUFFIX,tiktokv.com
-  - DOMAIN-SUFFIX,tiktokcdn.com
-  - DOMAIN-SUFFIX,tiktokstatic.com
-  - DOMAIN-SUFFIX,tiktokd.org
-  - DOMAIN-SUFFIX,tiktokv.us
-  - DOMAIN-SUFFIX,tik-tokapi.com
-  - DOMAIN-SUFFIX,musical.ly
-  - DOMAIN-SUFFIX,muscdn.com
-  - DOMAIN-SUFFIX,musemuse.cn
-  - DOMAIN-SUFFIX,tiktok-v6.com
-  - DOMAIN-SUFFIX,byteoversea.com
-  - DOMAIN-SUFFIX,byteoversea.net
-  - DOMAIN-SUFFIX,ttoversea.net
-  - DOMAIN-SUFFIX,ttoverseaus.net
-  - DOMAIN-SUFFIX,byteimg.com
-  - DOMAIN-SUFFIX,ibyteimg.com
-  - DOMAIN-SUFFIX,byteimg-oversea.com
-  - DOMAIN-SUFFIX,ibytedtos.com
-  - DOMAIN-SUFFIX,pstatp.com
-  - DOMAIN-SUFFIX,ipstatp.com
-  - DOMAIN-SUFFIX,sgpstatp.com
-  - DOMAIN-SUFFIX,snssdk.com
-  - DOMAIN-SUFFIX,sgsnssdk.com
-  - DOMAIN-SUFFIX,isnssdk.com
-  - DOMAIN-SUFFIX,ttvideo.com
-  - DOMAIN-SUFFIX,ttwstatic.com
-  - DOMAIN-SUFFIX,bytegecko.com
-  - DOMAIN-SUFFIX,bytegecko-i18n.com
-  - DOMAIN-SUFFIX,bytefcdn.com
-  - DOMAIN-SUFFIX,bytefcdn-tt.com
-  - DOMAIN-SUFFIX,bytefcdn-oversea.com
-  - DOMAIN-SUFFIX,bytefcdn-static.com
-  - DOMAIN-SUFFIX,bytefcdn-tt-alpha.com
-  - DOMAIN-SUFFIX,bytedapm.com
-  - DOMAIN-SUFFIX,byteintl.net
-  - DOMAIN-SUFFIX,byteglb.com
-  - DOMAIN-SUFFIX,byteeffect.com
-  - DOMAIN-SUFFIX,bytedns.net
-  - DOMAIN-SUFFIX,byteicdn.com
-  - DOMAIN-SUFFIX,volces.com
-  - DOMAIN-SUFFIX,volceingest.com
-  - DOMAIN-SUFFIX,byteactivity.com
-  - DOMAIN-SUFFIX,tlivecdn.com
-  - DOMAIN-SUFFIX,ttlivecdn.com
-  - DOMAIN-SUFFIX,ibyterom.com
-  - DOMAIN-SUFFIX,bytedance.com
-  - DOMAIN-SUFFIX,volcengine.com
-  - DOMAIN-SUFFIX,volcengineapi.com
-  - DOMAIN-SUFFIX,bytedance.net
-  - DOMAIN-SUFFIX,byteicdn.net
-  - DOMAIN-SUFFIX,bytebus.com
-  - DOMAIN-SUFFIX,bytetos.com
-  - DOMAIN-SUFFIX,ttads.com
-  - DOMAIN-SUFFIX,bytegoofy.com
-  - DOMAIN-SUFFIX,bytedanceapi.com
-  - DOMAIN-SUFFIX,bytepond.com
-  - DOMAIN-SUFFIX,bytedance.io
-  - DOMAIN-SUFFIX,bytemod.com
-  - DOMAIN-SUFFIX,bytehtest.com
-  - DOMAIN-SUFFIX,bytevfs.com
-  - DOMAIN-SUFFIX,effecthouse.com
-  - DOMAIN-SUFFIX,capcut.com
-  - DOMAIN-SUFFIX,byted-static.com
-  - DOMAIN-SUFFIX,pangle.io
-  - DOMAIN-SUFFIX,getaglobal.com
-  - DOMAIN-SUFFIX,bdurl.net
-  - DOMAIN-SUFFIX,bytegecko.net
-  - DOMAIN-SUFFIX,bytetos.net
-  - DOMAIN-SUFFIX,byte-static.com
-  - DOMAIN-SUFFIX,volcengine.net
-  - DOMAIN-SUFFIX,volces.net
-  - DOMAIN-SUFFIX,byte-dns.com
-  - DOMAIN-SUFFIX,bytednsapi.com
-  - DOMAIN-SUFFIX,ibytedapm.com
-
-  # Tokopedia, Gojek & Logistics
-  - DOMAIN-SUFFIX,tokopedia.com
-  - DOMAIN-SUFFIX,tokopedia.net
-  - DOMAIN-SUFFIX,tokope.id
-  - DOMAIN-SUFFIX,tokopedianow.com
-  - DOMAIN-SUFFIX,assets-tokopedia.com
-  - DOMAIN-SUFFIX,aj-cdn.com
-  - DOMAIN-SUFFIX,go-jek.com
-  - DOMAIN-SUFFIX,gotocompany.com
-  - DOMAIN-SUFFIX,go-pay.co.id
-  - DOMAIN-SUFFIX,midtrans.com
-  - DOMAIN-SUFFIX,tawk.to
-  - DOMAIN-SUFFIX,tiktokshop.com
-  - DOMAIN-SUFFIX,ibyteit.com
-  - DOMAIN-SUFFIX,byteintl.com
-  - DOMAIN-SUFFIX,sgsnssdk.org
-  - DOMAIN-SUFFIX,ctobsnssdk.com
-  - DOMAIN-SUFFIX,go-jek.io
-  - DOMAIN-SUFFIX,gojekapi.com
-  - DOMAIN-SUFFIX,gojek.com
-  - DOMAIN-SUFFIX,go-pay.id
-  - DOMAIN-SUFFIX,gopay.id
-  - DOMAIN-SUFFIX,tokopoints.com
-  - DOMAIN-SUFFIX,tkp.me
-  - DOMAIN-SUFFIX,tokopediastatic.com
-  - DOMAIN-SUFFIX,gosend.id
-  - DOMAIN-SUFFIX,toko.ly
-
-  # CDN & Third Party
-  - DOMAIN-SUFFIX,akamaized.net
-  - DOMAIN-SUFFIX,edgecastdns.net
-  - DOMAIN-SUFFIX,edgecastcdn.net
-  - DOMAIN-SUFFIX,fastly.net
-  - DOMAIN-SUFFIX,cloudfront.net
-  - DOMAIN-SUFFIX,app-measurement.com
-  - DOMAIN-SUFFIX,crashlytics.com
-  - DOMAIN-SUFFIX,myvzw.com
-  - DOMAIN-SUFFIX,edgekey.net
-  - DOMAIN-SUFFIX,edgesuite.net
-  - DOMAIN-SUFFIX,byteorange.com
-  - DOMAIN-SUFFIX,bytemover.com
-  - DOMAIN-SUFFIX,byteconf.com
-  - DOMAIN-SUFFIX,giphy.com
-  - DOMAIN-SUFFIX,gvt1.com
-  - DOMAIN-SUFFIX,worldfcdn.com
-
-  # --- [4] DOMAIN KEYWORD (Broad Catch) ---
+  # --- [2] DOMAIN KEYWORD (Jalur Cepat Stream, Gift & Push Data) ---
   - DOMAIN-KEYWORD,tiktok
   - DOMAIN-KEYWORD,bytedance
   - DOMAIN-KEYWORD,byteimg
-  - DOMAIN-KEYWORD,byteoversea
-  - DOMAIN-KEYWORD,ibyteimg
   - DOMAIN-KEYWORD,ibytedtos
   - DOMAIN-KEYWORD,snssdk
-  - DOMAIN-KEYWORD,pstatp
   - DOMAIN-KEYWORD,ttvideo
   - DOMAIN-KEYWORD,webcast
   - DOMAIN-KEYWORD,pull-rtmp
+  - DOMAIN-KEYWORD,push-rtmp
   - DOMAIN-KEYWORD,pull-hls
   - DOMAIN-KEYWORD,bytefcdn
+  - DOMAIN-KEYWORD,pili
+  - DOMAIN-KEYWORD,bytepulse
 
-  # --- [5] IP ADDRESSES (OPTIMIZED JALUR EMAS) ---
+  # --- [3] DOMAIN SUFFIX (Aset Gambar, Gift, Stiker & Komentar) ---
+  - DOMAIN-SUFFIX,pstatp.com
+  - DOMAIN-SUFFIX,byteactivity.com
+  - DOMAIN-SUFFIX,muscdn.com
+  - DOMAIN-SUFFIX,musical.ly
+  - DOMAIN-SUFFIX,bytegecko.com
+  - DOMAIN-SUFFIX,volces.com
+  - DOMAIN-SUFFIX,tlivecdn.com
+  - DOMAIN-SUFFIX,ttlivecdn.com
+  - DOMAIN-SUFFIX,byteoversea.com
+  - DOMAIN-SUFFIX,ibyteimg.com
+  - DOMAIN-SUFFIX,capcut.com
+  - DOMAIN-SUFFIX,akamaized.net
+  - DOMAIN-SUFFIX,worldfcdn.com
+
+  # Tokopedia & Gojek
+  - DOMAIN-SUFFIX,tokopedia.com
+  - DOMAIN-SUFFIX,tokope.id
+  - DOMAIN-SUFFIX,go-jek.com
+  - DOMAIN-SUFFIX,gojek.com
+  - DOMAIN-SUFFIX,gopay.id
+
+  # --- [4] IP ADDRESSES (OPTIMIZED JALUR EMAS) ---
   # BLOCK 1: GLOBAL CORE (ByteDance ASN)
   - IP-CIDR,156.236.0.0/16,no-resolve
   - IP-CIDR,108.160.160.0/20,no-resolve
   - IP-CIDR,139.177.128.0/18,no-resolve
   - IP-CIDR,139.177.192.0/18,no-resolve
 
-  # BLOCK 2: ASIA TENGGARA & REGIONAL (Korea/Thai/Indo/Cina)
+  # BLOCK 2: ASIA TENGGARA & REGIONAL (Jalur Terdekat)
   - IP-CIDR,101.32.0.0/16,no-resolve
   - IP-CIDR,101.33.0.0/16,no-resolve
   - IP-CIDR,203.205.232.0/21,no-resolve
   - IP-CIDR,203.80.96.0/22,no-resolve
+  - IP-CIDR,119.167.178.0/24,no-resolve
 
   # BLOCK 3: CDN & ACCELERATION (Anti-Buffering)
   - IP-CIDR,47.246.0.0/16,no-resolve
   - IP-CIDR,47.74.0.0/16,no-resolve
   - IP-CIDR,13.32.0.0/15,no-resolve
   - IP-CIDR,13.224.0.0/14,no-resolve
+  - IP-CIDR,205.251.192.0/18,no-resolve
