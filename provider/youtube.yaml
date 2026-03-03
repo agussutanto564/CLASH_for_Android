@@ -1,9 +1,11 @@
-# NAME: YouTube (Ultimate 100% Edition)
-# AUTHOR: agussutanto465
-# UPDATED: 2026-02-26
-# STATUS: 100% PROVIDER GRADE - ZERO THROTTLE
 payload:
-  # --- [1] CRITICAL VIDEO & CDN (Zero Buffering) ---
+  # --- [0] CRITICAL PROCESS NAME (Wajib untuk 10/10) ---
+  # Menjamin 100% traffic YouTube ditarik ke Proxy meski tanpa kuota
+  - PROCESS-NAME,com.google.android.youtube
+  - PROCESS-NAME,com.google.android.youtube.tv
+  - PROCESS-NAME,com.google.android.apps.youtube.music
+
+  # --- [1] VIDEO STREAMING & CDN (Anti-Buffering) ---
   - DOMAIN-SUFFIX,googlevideo.com
   - DOMAIN-SUFFIX,gvt1.com
   - DOMAIN-SUFFIX,gvt2.com
@@ -13,13 +15,14 @@ payload:
   - DOMAIN-KEYWORD,googlevideo
   - DOMAIN-KEYWORD,gvt1
 
-  # --- [2] APP & API ENGINE (Fast Interface) ---
+  # --- [2] UI, THUMBNAIL & API ENGINE (Fast Loading) ---
   - DOMAIN-SUFFIX,youtube.com
   - DOMAIN-SUFFIX,youtu.be
   - DOMAIN-SUFFIX,yt.be
   - DOMAIN-SUFFIX,ytimg.com
   - DOMAIN-SUFFIX,ggpht.com
   - DOMAIN-SUFFIX,googleapis.com
+  - DOMAIN-SUFFIX,googleusercontent.com
   - DOMAIN-SUFFIX,youtubei.googleapis.com
   - DOMAIN-SUFFIX,youtube-ui.l.google.com
   - DOMAIN-SUFFIX,youtubeembeddedplayer.googleapis.com
@@ -33,7 +36,7 @@ payload:
   - DOMAIN-SUFFIX,googlesyndication.com
   - DOMAIN-KEYWORD,youtube
 
-  # --- [4] IP-CIDR PROVIDER GRADE (Full Google Global Cache) ---
+  # --- [4] IP-CIDR PROVIDER GRADE (Optimized Google Global Cache) ---
   - IP-CIDR,172.217.0.0/16,no-resolve
   - IP-CIDR,142.250.0.0/15,no-resolve
   - IP-CIDR,173.194.0.0/16,no-resolve
