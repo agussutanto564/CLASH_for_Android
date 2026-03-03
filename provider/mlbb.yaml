@@ -1,6 +1,10 @@
 payload:
+  # --- [ PRIORITAS 0: PROCESS NAME (Wajib untuk 10/10) ] ---
+  # Menangkap traffic langsung dari mesin aplikasi agar tidak bocor
+  - PROCESS-NAME,com.mobile.legends
+  - PROCESS-NAME,com.vng.mlbbvn
+
   # --- [ PRIORITAS 1: KEYWORD SEARCH ] ---
-  # Menangkap semua traffic yang mengandung kata kunci utama secara instan
   - DOMAIN-KEYWORD,mobilelegends
   - DOMAIN-KEYWORD,moonton
   - DOMAIN-KEYWORD,youngjoygame
@@ -11,9 +15,11 @@ payload:
   - DOMAIN-KEYWORD,akamai
   - DOMAIN-KEYWORD,volcano
   - DOMAIN-KEYWORD,gcore
+  # Tambahan Patch 2026
+  - DOMAIN-KEYWORD,bytefcdn
+  - DOMAIN-KEYWORD,bytepulse
 
   # --- [ PRIORITAS 2: CORE BATTLE & AUTH ] ---
-  # Server utama game dan login
   - DOMAIN-SUFFIX,mobilelegends.com
   - DOMAIN-SUFFIX,moonton.com
   - DOMAIN-SUFFIX,moontonapi.com
@@ -25,7 +31,6 @@ payload:
   - DOMAIN-SUFFIX,payments.google.com
 
   # --- [ PRIORITAS 3: INFRASTRUKTUR BYTEDANCE & TENCENT ] ---
-  # Pemilik Moonton & penyedia cloud tier-1
   - DOMAIN-SUFFIX,bytedance.com
   - DOMAIN-SUFFIX,bytegecko.com
   - DOMAIN-SUFFIX,byteoversea.com
@@ -44,7 +49,6 @@ payload:
   - DOMAIN-SUFFIX,bugly.qq.com
 
   # --- [ PRIORITAS 4: ASSETS & CDN STABILITY ] ---
-  # Untuk download data skin, resource, dan video event
   - DOMAIN-SUFFIX,akamaized.net
   - DOMAIN-SUFFIX,alicdn.com
   - DOMAIN-SUFFIX,aliyun.com
@@ -61,9 +65,11 @@ payload:
   - DOMAIN-SUFFIX,bilicdn.com
   - DOMAIN-SUFFIX,cloudflare.com
   - DOMAIN-SUFFIX,vpsvc.com
+  # Patch khusus Anti-Stuck 99%
+  - DOMAIN-SUFFIX,ttlivecdn.com
+  - DOMAIN-SUFFIX,tlivecdn.com
 
   # --- [ PRIORITAS 5: VOICE & ANALYTICS ] ---
-  # Fitur tambahan agar tidak stuck 99%
   - DOMAIN-SUFFIX,agora.io
   - DOMAIN-SUFFIX,agora.com
   - DOMAIN-SUFFIX,agoralab.co
@@ -79,7 +85,6 @@ payload:
   - DOMAIN-SUFFIX,firebaseio.com
 
   # --- [ PRIORITAS 6: IP-CIDR (STABILITY BYPASS) ] ---
-  # Jalur tol langsung ke data center (tanpa resolve DNS)
   - IP-CIDR,203.205.128.0/17,no-resolve
   - IP-CIDR,119.28.0.0/13,no-resolve
   - IP-CIDR,150.109.0.0/16,no-resolve
@@ -91,3 +96,5 @@ payload:
   - IP-CIDR,103.136.220.0/22,no-resolve
   - IP-CIDR,45.249.212.0/22,no-resolve
   - IP-CIDR,139.159.0.0/16,no-resolve
+  # Tambahan IP khusus Data Center Singapore (Battle Server)
+  - IP-CIDR,128.1.0.0/16,no-resolve
