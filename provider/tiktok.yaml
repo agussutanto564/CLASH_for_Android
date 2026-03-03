@@ -11,7 +11,6 @@ Payload:
   - DOMAIN,p16-tiktokcdn-com.akamaized.net
 
   # --- [3] DOMAIN SUFFIX (Cleaned & Optimized) ---
-  # TikTok & Bytedance Core
   - DOMAIN-SUFFIX,tiktok.com
   - DOMAIN-SUFFIX,tiktokv.com
   - DOMAIN-SUFFIX,tiktokcdn.com
@@ -149,47 +148,21 @@ Payload:
   - DOMAIN-KEYWORD,pull-hls
   - DOMAIN-KEYWORD,bytefcdn
 
-  # --- [5] IP ADDRESSES ---
-  - IP-CIDR,3.0.0.0/8,no-resolve
-  - IP-CIDR,13.32.0.0/15,no-resolve
-  - IP-CIDR,13.224.0.0/14,no-resolve
-  - IP-CIDR,18.154.0.0/15,no-resolve
-  - IP-CIDR,20.205.0.0/16,no-resolve
-  - IP-CIDR,34.120.0.0/16,no-resolve
-  - IP-CIDR,35.190.0.0/17,no-resolve
-  - IP-CIDR,47.74.0.0/16,no-resolve
-  - IP-CIDR,47.88.0.0/16,no-resolve
-  - IP-CIDR,47.89.136.0/24,no-resolve
-  - IP-CIDR,47.246.0.0/16,no-resolve
-  - IP-CIDR,47.252.0.0/16,no-resolve
-  - IP-CIDR,101.32.0.0/16,no-resolve
-  - IP-CIDR,101.33.0.0/16,no-resolve
-  - IP-CIDR,103.136.220.0/22,no-resolve
-  - IP-CIDR,103.213.96.0/22,no-resolve
-  - IP-CIDR,103.243.230.0/23,no-resolve
-  - IP-CIDR,104.16.0.0/13,no-resolve
+  # --- [5] IP ADDRESSES (OPTIMIZED JALUR EMAS) ---
+  # BLOCK 1: GLOBAL CORE (ByteDance ASN)
+  - IP-CIDR,156.236.0.0/16,no-resolve
   - IP-CIDR,108.160.160.0/20,no-resolve
-  - IP-CIDR,110.16.0.0/12,no-resolve
-  - IP-CIDR,110.249.208.0/20,no-resolve
-  - IP-CIDR,111.13.0.0/16,no-resolve
-  - IP-CIDR,111.230.0.0/16,no-resolve
-  - IP-CIDR,117.160.0.0/12,no-resolve
-  - IP-CIDR,120.52.0.0/16,no-resolve
-  - IP-CIDR,120.232.0.0/16,no-resolve
-  - IP-CIDR,121.51.0.0/16,no-resolve
-  - IP-CIDR,123.1.64.0/21,no-resolve
-  - IP-CIDR,128.14.206.0/23,no-resolve
-  - IP-CIDR,130.44.128.0/17,no-resolve
-  - IP-CIDR,130.44.128.0/18,no-resolve
-  - IP-CIDR,130.211.0.0/16,no-resolve
-  - IP-CIDR,138.117.144.0/21,no-resolve
   - IP-CIDR,139.177.128.0/18,no-resolve
   - IP-CIDR,139.177.192.0/18,no-resolve
-  - IP-CIDR,143.204.0.0/16,no-resolve
-  - IP-CIDR,156.236.0.0/16,no-resolve
-  - IP-CIDR,161.117.0.0/16,no-resolve
-  - IP-CIDR,172.64.0.0/13,no-resolve
-  - IP-CIDR,203.80.96.0/22,no-resolve
-  - IP-CIDR,203.134.128.0/19,no-resolve
+
+  # BLOCK 2: ASIA TENGGARA & REGIONAL (Korea/Thai/Indo/Cina)
+  - IP-CIDR,101.32.0.0/16,no-resolve
+  - IP-CIDR,101.33.0.0/16,no-resolve
   - IP-CIDR,203.205.232.0/21,no-resolve
-  - IP-CIDR,216.58.192.0/19,no-resolve
+  - IP-CIDR,203.80.96.0/22,no-resolve
+
+  # BLOCK 3: CDN & ACCELERATION (Anti-Buffering)
+  - IP-CIDR,47.246.0.0/16,no-resolve
+  - IP-CIDR,47.74.0.0/16,no-resolve
+  - IP-CIDR,13.32.0.0/15,no-resolve
+  - IP-CIDR,13.224.0.0/14,no-resolve
